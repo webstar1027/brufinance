@@ -1,0 +1,224 @@
+.highlight {
+    color: #7C037B;
+}
+
+.row {
+    width  : 100%;
+    padding: 0 15px
+}
+
+.col {
+    width: 50%;
+}
+
+.bigImage {
+    width     : 107%;
+    height    : 103%;
+    margin-top: 0px;
+    z-index   : 23;
+    position  : relative;
+}
+
+.smallImage {
+    position: absolute;
+    width   : auto;
+    z-index : 1;
+}
+
+.connectWithUs {
+    margin-top  : 16%;
+    font-size   : 43px;
+    font-weight : 600;
+    font-family : 'Rubik';
+    padding-left: 6%;
+}
+
+.desText {
+    padding-left: 6%;
+    font-size   : 25px;
+    font-weight : 300;
+    margin      : 4% 0;
+}
+
+.desText span {
+    color: #7C037B;
+}
+
+.metamask {
+    display      : inline-block;
+    width        : 37%;
+    border       : 2px solid #7C037B;
+    border-radius: 10px;
+    padding      : 18px;
+    text-align   : center;
+    color        : #EF881B;
+    font-size    : 20px;
+    margin-right : 6%;
+    margin-left  : 6%;
+    margin-top   : 5%;
+    cursor       : pointer;
+}
+
+.metamask img {
+    width       : 27px;
+    margin-right: 11px;
+    margin-top  : -4px;
+}
+
+.walletConnect {
+    display      : inline-block;
+    width        : 37%;
+    border       : 2px solid #7C037B;
+    border-radius: 10px;
+    padding      : 18px;
+    text-align   : center;
+    color        : #409CFC;
+    font-size    : 20px;
+    margin-top   : 5%;
+    cursor       : pointer;
+}
+
+.walletConnect img {
+    width       : 27px;
+    margin-right: 11px;
+    margin-top  : -4px;
+}
+
+.BottomNote {
+    font-size  : 15px;
+    color      : grey;
+    font-weight: 300;
+    margin-left: 6%;
+    /* margin-top : 10%; */
+}
+
+.metamask:hover {
+    background-color: #7C037B;
+    color           : white;
+}
+
+.walletConnect:hover {
+    background-color: #7C037B;
+    color           : white;
+}
+
+
+
+/* <---------------------------------------------------------------------------> */
+
+
+
+
+/* @media  (min-width:1024px) {
+    .connectWithUs{
+        margin-top: 16%;
+        font-size: 50px;
+        font-weight: 600;
+        font-family: 'Rubik';
+        padding-left: 6%;
+    } 
+
+    .BottomNote {
+        font-size  : 20px !important;
+        margin-left: 6% !important;
+        font-weight: 500;
+    }
+
+    .metamask{
+        width: 83%;
+        font-size: 26px;
+        margin-right: 6%;
+        margin-left: 6%;
+        margin-top: 5%;
+        }
+} */
+
+
+@media  (min-width:769px) and (max-width:1023px) {
+    .connectWithUs{
+        margin-top: 16%;
+        font-size: 45px;
+        font-weight: 600;
+        font-family: 'Rubik';
+        padding-left: 6%;
+    } 
+
+    .BottomNote {
+        font-size  : 20px !important;
+        margin-left: 6% !important;
+        font-weight: 500;
+    }
+
+    .metamask{
+        width: 83%;
+        font-size: 26px;
+        margin-right: 6%;
+        margin-left: 6%;
+        margin-top: 5%;
+        }
+}
+
+
+
+@media  (max-width:768px) {
+    .connectWithUs{
+        margin-top: 24%;
+        font-size: 31px;
+        font-weight: 600;
+        font-family: 'Rubik';
+        padding-left: 6%;
+    } 
+
+    .BottomNote {
+        font-size  : 14px !important;
+        margin-left: 6% !important;
+        font-weight: 500;
+    }
+
+    .metamask{
+        width: 73%;
+        font-size: 20px;
+        margin-right: 6%;
+        margin-left: 6%;
+        margin-top: 5%;
+        }
+    
+}
+
+@media  (max-width:468px) {
+    .smallImage {
+        display: none;
+    }  
+    .bigImage{
+        display: none;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -37px;
+        flex-direction: column-reverse;
+    }
+
+    .col {
+        width: 100%;
+    }
+
+    .connectWithUs {
+        margin-top: 32%;
+        font-size: 29px;
+        padding-left: 30%;
+    }
+    .BottomNote {
+        font-size: 12px !important;
+        margin-left: 33% !important;
+        font-weight: 500;
+    }
+    .metamask{
+    width: 86%;
+    font-size: 20px;
+    margin-left: 20%;
+    margin-top: 5%;
+    }
+    
+}

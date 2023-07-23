@@ -1,0 +1,154 @@
+html,
+body {
+  min-height: 100vh;
+  height    : auto;
+  margin    : 0;
+  overflow  : auto;
+}
+
+.content {
+  padding: 30px 0px 0px 0px;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.container {
+  max-width: 980px;
+  margin   : auto;
+}
+
+.font-color-primary {
+  color: #8e46cb;
+}
+
+.font-color-secondary {
+  color: #2196f3;
+}
+
+.font-bold-max {
+  font-weight: 800;
+}
+
+.closeeBtn {
+  position     : absolute;
+  right        : 20px;
+  top          : 19px;
+  cursor       : pointer;
+  font-size    : 19px;
+  border       : 2px solid #676767;
+  border-radius: 67px;
+  height       : 24px;
+  width        : 24px;
+  text-align   : center
+}
+
+.modal-content {
+  border-radius: 19px !important;
+  border       : none !important;
+}
+
+.modal-dialog {
+  max-width: 550px !important;
+  margin   : 3.75rem auto;
+}
+
+.floatingBubble {
+  height       : 0px;
+  width        : 0px;
+  position     : absolute;
+  border-radius: 100px;
+  box-shadow   : 0 0 142px 122px #9c3cc861;
+}
+
+.BorrowModal .modal-dialog {
+  max-width: 750px !important;
+  width    : 750px !important;
+}
+
+.BorrowModal_new .modal-dialog {
+  max-width: 575px !important;
+  width    : 575px !important;
+}
+
+
+/* Popup container */
+.popup {
+  position   : relative;
+  /* display : inline-block; */
+  /* cursor  : pointer; */
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility      : hidden;
+  width           : 162px;
+  background-color: #55237a;
+  color           : #fff;
+  text-align      : center;
+  border-radius   : 6px;
+  padding         : 6px 0;
+  position        : absolute;
+  z-index         : 1;
+  bottom          : 117%;
+  left            : 48%;
+  margin-left     : -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content     : "";
+  position    : absolute;
+  top         : 100%;
+  left        : 50%;
+  margin-left : -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility       : visible;
+  -webkit-animation: fadeIn 1s;
+  animation        : fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* <-------------------------------> */
+@media (max-width: 468px) {
+  .BorrowModal_new .modal-dialog {
+    max-width: 90% !important;
+    width    : 90% !important;
+  }
+}
+
+.PoolDetailsModal .modal-dialog {
+  max-width: 720px !important;
+  margin   : 3.75rem auto;
+}

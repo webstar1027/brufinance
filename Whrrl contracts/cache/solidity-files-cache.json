@@ -1,0 +1,259 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/neosoft/Desktop/Whrrl/Whrrl contracts/contracts/CmaAudits.sol": {
+      "lastModificationDate": 1657199659344,
+      "contentHash": "f4f83cba7456ef73ecb4532eccca17b8",
+      "sourceName": "contracts/CmaAudits.sol",
+      "solcConfig": {
+        "version": "0.5.14",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Common.sol",
+        "./Insurance.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "CmaSc"
+      ]
+    },
+    "/home/neosoft/Desktop/Whrrl/Whrrl contracts/contracts/Common.sol": {
+      "lastModificationDate": 1657199636849,
+      "contentHash": "c62749146559048dc171e226dfce5a51",
+      "sourceName": "contracts/Common.sol",
+      "solcConfig": {
+        "version": "0.5.14",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Commons"
+      ]
+    },
+    "/home/neosoft/Desktop/Whrrl/Whrrl contracts/contracts/Insurance.sol": {
+      "lastModificationDate": 1657199643721,
+      "contentHash": "2105bf4bdeb5927209d9ca514420c4e6",
+      "sourceName": "contracts/Insurance.sol",
+      "solcConfig": {
+        "version": "0.5.14",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Common.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "InsuranceSc"
+      ]
+    },
+    "/home/neosoft/Desktop/Whrrl/Whrrl contracts/contracts/Token.sol": {
+      "lastModificationDate": 1657199653032,
+      "contentHash": "1a85ca0e86767e8c5370b9ba95b72b1a",
+      "sourceName": "contracts/Token.sol",
+      "solcConfig": {
+        "version": "0.5.14",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Common.sol",
+        "./Insurance.sol",
+        "./CmaAudits.sol",
+        "./Loans.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Asset"
+      ]
+    },
+    "/home/neosoft/Desktop/Whrrl/Whrrl contracts/contracts/Loans.sol": {
+      "lastModificationDate": 1657199648505,
+      "contentHash": "2b06a57644c0d4758fd7b317478bf483",
+      "sourceName": "contracts/Loans.sol",
+      "solcConfig": {
+        "version": "0.5.14",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Common.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Loans"
+      ]
+    },
+    "/home/neosoft/Desktop/Whrrl/Whrrl contracts/contracts/Greeter.sol": {
+      "lastModificationDate": 1657191958501,
+      "contentHash": "ef20aa33308269d0bac39f439e489ee8",
+      "sourceName": "contracts/Greeter.sol",
+      "solcConfig": {
+        "version": "0.5.14",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": []
+    },
+    "/home/neosoft/Desktop/Whrrl/Whrrl contracts/contracts/Storage.sol": {
+      "lastModificationDate": 1657614479927,
+      "contentHash": "4f3957fc4a16d402913912c8224b2a5c",
+      "sourceName": "contracts/Storage.sol",
+      "solcConfig": {
+        "version": "0.5.14",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "AssetInformationOnNetwork",
+        "Storage"
+      ]
+    }
+  }
+}

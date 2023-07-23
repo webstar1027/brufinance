@@ -1,0 +1,275 @@
+.form-control-plaintext {
+    outline: none !important;
+}
+
+.commImage {
+    width        : 126px;
+    border-radius: 50%;
+    position     : absolute;
+    top          : -14px;
+    right        : 38px;
+    height       : 120px;
+}
+
+.col {
+    font-weight: 500 !important;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.Mheader {
+    width: 100%;
+}
+
+.Mheader h1 {
+    display: inline-block;
+    width  : 50%;
+}
+
+.modal-header {
+    padding-bottom: 0;
+    border        : none;
+}
+
+.processLoader {
+    position: absolute;
+    display : inline-block;
+    top     : 10px;
+    right   : 10px;
+}
+
+.spinner-border-Loader {
+    width : 25px !important;
+    height: 25px !important;
+}
+
+.form-control {
+    width: 75% !important;
+}
+
+.viewTrans {
+    margin-bottom  : 0;
+    font-size      : 14px;
+    color          : green;
+    text-decoration: underline;
+}
+
+.transactionSuccessImg {
+    width        : 116px;
+    border-radius: 50%;
+    margin-bottom: 5%;
+}
+
+
+.modalClasssText {
+    border-radius   : 10px;
+    padding         : 10px;
+    background-color: #a670c03b;
+    margin          : 22px 23px;
+    margin-bottom   : 10px;
+    word-spacing    : 2px;
+    letter-spacing  : 0.5px;
+}
+
+.fa-times {
+    font-size: 19px !important;
+}
+
+.modalPText {
+    padding-left: 10px;
+    font-size   : 17px;
+}
+
+.successModaldiv {
+    background-color: #efe5f4;
+    margin          : 20px 14px;
+    border-radius   : 10px;
+    padding         : 7px;
+}
+
+.successModaldivP {
+    background-color: #d9c2e4;
+}
+
+.successModaldivPSuccess {
+    background-color: #d7efcc;
+    margin          : 20px 14px;
+    border-radius   : 10px;
+    padding         : 7px;
+}
+
+.depositSuccessModalPL {
+    padding      : 6px 17%;
+    font-size    : 19px;
+    margin-bottom: 0;
+    text-align   : left;
+    padding-right: 6%;
+    word-spacing : 1px;
+}
+
+.depositSUccessPIcon {
+    font-size : 46px;
+    color     : #51b02b;
+    margin-top: 11px;
+    position  : absolute;
+    left      : 33px;
+}
+
+.youDepositedMsg {
+    margin-bottom : 5px;
+    font-size     : 22px;
+    word-spacing  : 3px;
+    letter-spacing: 0.4px;
+}
+
+.youDepositedSubMsg {
+    text-align: center;
+    border-radius: 4px;
+    padding      : 6px;
+    margin       : 5px;
+    margin-bottom: 3px;
+}
+
+.spanMainCard {
+    float        : right;
+    padding-right: 11px;
+}
+
+.lightColorTheme {
+    color: #7C037B;
+}
+
+.floatingBubble1 {
+    top  : 30%;
+    right: 21%;
+}
+
+.floatingBubble2 {
+    bottom: 15%;
+    left  : 38%;
+}
+
+.PtextDeposit2 {
+    display    : inline-block;
+    width      : 30%;
+    margin     : 6%;
+    margin-left: 12%;
+}
+
+.modalH3 {
+    padding                : 18px;
+    text-align             : center;
+    margin-bottom          : 0;
+    background             : linear-gradient(29deg, rgb(224 143 244 / 31%) 0.11%, rgb(146 70 177 / 22%) 100%);
+    border-top-left-radius : 19px;
+    border-top-right-radius: 19px;
+}
+
+.modal-content {
+    border-radius: 19px !important;
+    border       : none !important;
+}
+
+.modal-body {
+    padding      : 0 !important;
+    border-radius: 19px !important;
+}
+
+.modalClasssText {
+    border-radius   : 10px;
+    padding         : 10px;
+    background-color: #a670c03b;
+    margin          : 22px 23px;
+    margin-bottom   : 10px;
+    word-spacing    : 2px;
+    letter-spacing  : 0.5px;
+}
+
+.mainRow {
+    width  : 100%;
+    margin : 0px;
+    padding: 13px;
+}
+
+.BorrowModal .modal-dialog {
+    width: 750px !important;
+}
+
+.RepayModal .modal-dialog {
+    width: 750px !important;
+}
+
+.repayModalDescription {
+    margin-top   : 10px;
+    padding      : 10px;
+    background   : rgba(166, 112, 192, 0.18);
+    border-radius: 16px;
+}
+
+.pModalTxt {
+    margin-bottom: 17px;
+}
+
+.pEligibleAmount {
+    border-bottom : dashed #dbdbdb;
+    padding-bottom: 10px;
+    margin-bottom : 8px;
+}
+
+.mainBtn {
+    text-align      : center;
+    background-color: #540F7A;
+    padding         : 15px;
+    color           : white;
+    border-radius   : 6px;
+    margin-top      : 25px;
+    cursor          : pointer;
+    margin-bottom   : 4px;
+}
+
+.repayBtn {
+    background-color: #38B000 !important;
+}
+
+.inputLoanAmount {
+    width        : 34%;
+    float        : right;
+    border-radius: 5px;
+    border       : 1px solid #c7c7c7;
+    padding      : 5px;
+    font-size    : 16px;
+    padding-left : 10px;
+}
+
+.highlightTextModal {
+    padding         : 10px;
+    text-align      : left;
+    background-color: #a670c02b;
+    border-radius   : 10px;
+    width           : 89%;
+    margin-top      : 5%;
+    word-spacing    : 5px;
+    letter-spacing  : 0.3px;
+}
+
+.button--deposit {
+    color           : white;
+    background-color: #540F7A;
+    width           : 96%;
+    margin-bottom   : 4%;
+    padding         : 13px;
+    border-radius   : 8px;
+    font-size       : 19px;
+}
+
+.button--withdraw {
+    color           : white;
+    background-color: #540F7A;
+    width           : 96%;
+    margin-bottom   : 4%;
+    padding         : 13px;
+    border-radius   : 8px;
+    font-size       : 19px;
+}

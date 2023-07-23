@@ -1,0 +1,115 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "E:\\projects\\Contract\\contracts\\IMyDiamondTeamFrok.sol": {
+      "lastModificationDate": 1661469902354,
+      "contentHash": "49a0b8b03abc2d472e73df0ab83d7e26",
+      "sourceName": "contracts/IMyDiamondTeamFrok.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "IMyDiamondTeamFrok",
+        "SafeMath"
+      ]
+    },
+    "E:\\projects\\Contract\\contracts\\ITokenFunction.sol": {
+      "lastModificationDate": 1661469902354,
+      "contentHash": "20a783ad66b46b7e637ea97e67306adb",
+      "sourceName": "contracts/ITokenFunction.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IMyDiamondTeamFrok.sol"
+      ],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "ITokenFunction"
+      ]
+    },
+    "E:\\projects\\Contract\\contracts\\MyDiamondTeamFrok.sol": {
+      "lastModificationDate": 1661469902370,
+      "contentHash": "acb9f8fd135e273499afcc15e364633f",
+      "sourceName": "contracts/MyDiamondTeamFrok.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ITokenFunction.sol"
+      ],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "MyDiamondTeamFrok"
+      ]
+    }
+  }
+}

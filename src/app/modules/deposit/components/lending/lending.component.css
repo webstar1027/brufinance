@@ -1,0 +1,589 @@
+:host {
+  height: 100%;
+}
+
+.lending {
+  display       : flex;
+  flex-direction: column;
+  height        : 100%;
+}
+
+.lending__main {
+  padding: 42px;
+  display: flex;
+  flex   : 1 0;
+}
+
+.lending__section-two h2:not(:last-child) {
+  margin-bottom: 10px;
+}
+.lending__wallet-balance {
+  color        : #117dc1;
+  border-bottom: 2px solid #117dc1;
+}
+.button {
+  border          : none;
+  outline         : none;
+  background-color: transparent;
+  border-radius   : 20px;
+  padding         : 5px 50px;
+}
+
+.button:not(:last-child) {
+  margin-right: 50px;
+}
+
+.button--deposit {
+  color           : white;
+  background-color: #540F7A;
+  width           : 96%;
+  margin-bottom   : 4%;
+  padding         : 13px;
+  border-radius   : 8px;
+  font-size       : 19px;
+}
+
+.button--withdraw {
+  color           : white;
+  background-color: #540F7A;
+  width           : 96%;
+  margin-bottom   : 4%;
+  padding         : 13px;
+  border-radius   : 8px;
+  font-size       : 19px;
+}
+
+.deposit-modal {
+  text-align: center;
+}
+
+input {
+  outline      : none;
+  border-radius: 8px;
+  border       : 1px solid #c1c1c1;
+  padding      : 5px 12px;
+  font-size    : 17px;
+  width        : 92%;
+  margin-top   : -3px;
+  text-align   : right;
+}
+
+/* External CSS */
+.col-4 {
+  width: 50%;
+}
+
+.column {
+  float  : left;
+  width  : 25%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear  : both;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bordetyy {
+  border       : 1px solid grey;
+  margin       : 8px 24px;
+  border-radius: 16px;
+  padding      : 14px 0;
+}
+
+.borrowbtn {
+  width           : 135px;
+  background-color: #fedbbd;
+  color           : #c48150;
+  border-radius   : 16px;
+  padding         : 5px;
+  font-size       : 12px;
+  margin-top      : -2px;
+  float           : right;
+  margin-right    : 19px;
+  cursor          : pointer;
+  text-transform  : uppercase;
+}
+
+.lenddBtn {
+  width           : 93px;
+  background-color: #e2f0fe;
+  color           : #689beb;
+  border-radius   : 16px;
+  padding         : 5px;
+  font-size       : 14px;
+  margin-top      : -3px;
+  float           : right;
+  margin-right    : 19px;
+  cursor          : pointer;
+}
+
+.asdsdjkh {
+  width        : 130px;
+  border-radius: 113px;
+  position     : absolute;
+  right        : 12px;
+  top          : 15px;
+}
+
+.asdjhsadhU {
+  width     : 52%;
+  font-size : 14px;
+  text-align: left;
+  margin-top: 13px;
+}
+
+.maintitle {
+  margin-bottom: 16px;
+  font-size    : 41px;
+  font-weight  : bold;
+  text-align   : left;
+  margin       : 0;
+}
+
+.switch {
+  position: relative;
+  display : inline-block;
+  width   : 60px;
+  height  : 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width  : 0;
+  height : 0;
+}
+
+.slider {
+  position          : absolute;
+  cursor            : pointer;
+  top               : 0;
+  left              : 0;
+  right             : 0;
+  bottom            : 0;
+  background-color  : #ccc;
+  -webkit-transition: 0.4s;
+  transition        : 0.4s;
+}
+
+.slider:before {
+  position          : absolute;
+  content           : "";
+  height            : 26px;
+  width             : 26px;
+  left              : 4px;
+  bottom            : 4px;
+  background-color  : white;
+  -webkit-transition: 0.4s;
+  transition        : 0.4s;
+}
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#overlay {
+  position        : fixed;
+  display         : none;
+  width           : 100%;
+  height          : 100%;
+  top             : 0;
+  left            : 0;
+  right           : 0;
+  bottom          : 0;
+  background-color: white;
+  z-index         : 2;
+  cursor          : pointer;
+}
+
+#text {
+  position     : absolute;
+  top          : 50%;
+  left         : 50%;
+  font-size    : 50px;
+  color        : white;
+  transform    : translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.asdhaishgda {
+  margin          : 0 auto;
+  background-color: #fedbbd;
+  color           : #c48150 !important;
+  padding         : 17px 99px;
+  border-radius   : 10px;
+  word-spacing    : 1px;
+  letter-spacing  : 1px;
+  font-size       : 31px;
+  text-decoration : none;
+  border          : 1px solid #c48150;
+}
+
+.asdsadYY2 {
+  margin          : 0 auto;
+  background-color: #e2f0fe;
+  color           : #689beb !important;
+  padding         : 17px 99px;
+  border-radius   : 10px;
+  word-spacing    : 1px;
+  letter-spacing  : 1px;
+  font-size       : 31px;
+  text-decoration : none;
+  border          : 1px solid #689beb;
+}
+
+.col-6 p {
+  margin-bottom: 6px;
+  font-size    : 15px;
+  text-align   : left;
+}
+
+.lendBtnInModal {
+  margin          : 0 auto;
+  margin-top      : 24px;
+  background-color: #e2f0fe;
+  color           : #689beb !important;
+  padding         : 2px 23px;
+  border-radius   : 10px;
+  word-spacing    : 1px;
+  letter-spacing  : 1px;
+  font-size       : 22px;
+  text-decoration : none;
+  border          : 1px solid #689beb;
+}
+
+.borrowBtnInModal {
+  margin          : 0 auto;
+  margin-top      : 24px;
+  background-color: #fedbbd;
+  color           : #c48150 !important;
+  padding         : 2px 23px;
+  border-radius   : 10px;
+  word-spacing    : 1px;
+  letter-spacing  : 1px;
+  font-size       : 22px;
+  text-decoration : none;
+  border          : 1px solid #c48150;
+}
+
+.makeBold {
+  font-weight: 700;
+}
+.lending__section-one {
+  flex: 0 0 60%;
+}
+
+.lending__section-two {
+  flex: 0 0 40%;
+}
+
+
+.lending__heading {
+  font-family: 'Rubik';
+  font-style : normal;
+  font-weight: 1000;
+  font-size  : 60px;
+  line-height: 75px;
+}
+
+.vector {
+  width     : 53px;
+  margin-top: 20px;
+}
+
+.lending__cont {
+  /* font-family: 'Rubik'; */
+  font-weight   : 300;
+  font-size     : 54px;
+  color         : #413c41;
+  margin-top    : 6%;
+  word-spacing  : 1px;
+  letter-spacing: 1.5px;
+  line-height   : 1.4;
+}
+
+.eth {
+  width        : 50px;
+  margin-bottom: 5px;
+}
+
+.lending__cont_bold {
+  color      : #7C037B;
+  font-weight: 1000;
+}
+
+.lending__btn1 {
+  font-family     : 'Rubik';
+  margin-top      : 20px;
+  width           : 265px;
+  height          : 80px;
+  font-size       : 26px;
+  color           : white;
+  font-weight     : 600;
+  border          : #540F7A 3px solid;
+  border-radius   : 15px;
+  background-color: #540F7A;
+}
+
+.lending__btn2 {
+  margin-left     : 13%;
+  font-family     : 'Rubik';
+  margin-top      : 20px;
+  width           : 265px;
+  height          : 80px;
+  font-size       : 26px;
+  color           : #540F7A;
+  font-weight     : 600;
+  border          : #540F7A 3px solid;
+  border-radius   : 15px;
+  background-color: transparent;
+}
+
+
+.lending__interest {
+  font-family: 'Rubik';
+  font-size  : 18px;
+  font-weight: 500;
+  color      : #540F7A;
+  margin-top : 100px;
+}
+
+.card_1 {
+  width        : 600px;
+  height       : 400px;
+  text-align   : center;
+  border-radius: 20px;
+  background   : #540F7A;
+  z-index      : 1;
+}
+
+.card_2 {
+  width           : 500px;
+  height          : auto;
+  text-align      : center;
+  border          : 3px solid #a274b887;
+  border-radius   : 20px;
+  z-index         : 2;
+  /* border-left  : 8px solid #7e297b; */
+  /* border-right : 8px solid #7e297b; */
+}
+
+.wallet_icon {
+  width: 46px;
+}
+
+.lendingTime {
+  background-color: #a670c063;
+  padding         : 5px 17px;
+  border-radius   : 10px;
+}
+
+.walletPClass {
+  text-align   : left;
+  padding      : 19px;
+  padding-left : 25px;
+  margin-bottom: 0;
+}
+
+.walletText {
+  font-size     : 30px;
+  padding-left  : 12px;
+  vertical-align: middle;
+  font-weight   : 500;
+  word-spacing  : 1px;
+  letter-spacing: 0.5px;
+}
+
+.statusCheck {
+  font-size: 3rem;
+  position : absolute;
+  right    : 17px;
+  top      : 2px;
+  color    : #3adf3a;
+}
+
+.walletBalance {
+  text-align    : left;
+  padding-left  : 6%;
+  font-size     : 21px;
+  font-weight   : 400;
+  letter-spacing: 0.4px;
+}
+
+.defText {
+  text-align  : right;
+  float       : right;
+  margin-right: 10px;
+}
+
+.lightColorTheme {
+  color: #7C037B;
+}
+
+.darkColorTheme {
+  color: #540F7A;
+}
+
+.darkColorThemeText {
+  color      : #7C037B;
+  font-weight: 500;
+}
+
+.walletNoteText {
+  background-color: #a670c02e;
+  margin          : 0 28px;
+  text-align      : left;
+  padding         : 12px 15px;
+  border-radius   : 16px;
+  font-size       : 21px;
+  color           : #1f1f1fba;
+  border          : 1px solid grey;
+  box-shadow      : 0px 4px 6px 0px #ababab;
+}
+
+.transactionsTab {
+  color           : black;
+  background-color: #a670c096;
+  padding         : 12px;
+  font-size       : 26px;
+  font-weight     : 400;
+  text-align      : left;
+  padding-left    : 6%;
+}
+
+.walletSideShadowBox {
+  height          : 94%;
+  width           : 104%;
+  margin-left     : -2%;
+  position        : absolute;
+  top             : 15px;
+  background-color: #7e297b;
+  z-index         : -31;
+  border-radius   : 37px;
+}
+
+.spiralImage {
+  position: absolute;
+  z-index : -46;
+  left    : -23%;
+  top     : 30%;
+  width   : 231px;
+}
+
+.PtextDeposit {
+  display: inline-block;
+  width  : 32%;
+  margin : 2%;
+}
+
+.PtextDeposit2 {
+  display    : inline-block;
+  width      : 30%;
+  margin     : 6%;
+  margin-left: 12%;
+}
+
+.modalH3 {
+  padding                : 18px;
+  margin-bottom          : 0;
+  background             : linear-gradient(29deg, rgb(224 143 244 / 31%) 0.11%, rgb(146 70 177 / 22%) 100%);
+  border-top-left-radius : 19px;
+  border-top-right-radius: 19px;
+}
+
+.modal-content {
+  border-radius: 19px !important;
+  border       : none !important;
+}
+
+.modal-body {
+  padding      : 0 !important;
+  border-radius: 19px !important;
+}
+
+.modalClasssText {
+  border-radius   : 10px;
+  padding         : 10px;
+  background-color: #a670c03b;
+  margin          : 22px 23px;
+  margin-bottom   : 10px;
+  word-spacing    : 2px;
+  letter-spacing  : 0.5px;
+}
+
+.fa-times {
+  font-size: 19px !important;
+}
+
+.modalPText {
+  padding-left: 10px;
+  font-size   : 17px;
+}
+
+.successModaldiv {
+  background-color: #efe5f4;
+  margin          : 20px 14px;
+  border-radius   : 10px;
+  padding         : 7px;
+}
+
+.successModaldivP {
+  background-color: #d9c2e4;
+}
+
+.successModaldivPSuccess {
+  background-color: #d7efcc;
+  margin          : 20px 14px;
+  border-radius   : 10px;
+  padding         : 7px;
+}
+
+.depositSuccessModalPL {
+  padding      : 6px 17%;
+  font-size    : 19px;
+  margin-bottom: 0;
+  text-align   : left;
+  padding-right: 6%;
+  word-spacing : 1px;
+}
+
+.depositSUccessPIcon {
+  font-size : 46px;
+  color     : #51b02b;
+  margin-top: 11px;
+  position  : absolute;
+  left      : 33px;
+}
+
+.youDepositedMsg {
+  margin-bottom : 5px;
+  font-size     : 22px;
+  word-spacing  : 3px;
+  letter-spacing: 0.4px;
+}
+
+.youDepositedSubMsg {
+  border-radius: 4px;
+  padding      : 6px;
+  margin       : 5px;
+  margin-bottom: 3px;
+}
+
+.floatingBubble1 {
+  top  : 30%;
+  right: 21%;
+}
+
+.floatingBubble2 {
+  bottom: 15%;
+  left  : 38%;
+}

@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 colm">
+      <div class="box box1">
+        <img src="../../../../../assets/images/peep-19.png" />
+        <p class="btnT" (click)="lendBtn()">Buy Bonds</p>
+        <i class="fa fa-info infoIcon" (click)="showOverlayMessage('lend')"></i>
+      </div>
+    </div>
+    <div class="col-6 colm">
+      <div class="box box2">
+        <img src="../../../../../assets/images/peep-35.png" />
+        <p class="btnT" (click)="borrowBtn()">Borrow</p>
+        <i
+          class="fa fa-info infoIcon"
+          (click)="showOverlayMessage('borrow')"
+        ></i>
+      </div>
+    </div>
+  </div>
+  <!-- <div class = "stepsToTest">
+        <br />
+        <br />
+        <br />
+        
+        <h3 class = "stepsToTest">Steps to Test<hr style = "width: 21%;"/></h3>
+        <p class="stepsToTest" style = "margin-top: 5px; color: #777;">The following three steps (in order) are important to help you test the platform.</p>
+        <ul>
+            <li>
+                <button class = "addPolygon"
+                (click)="onChangeTBtns('addnetwork')">Polygon to MetaMask</button>
+            </li>
+                <li>
+                    <br /><button class = "addUSDTToWallet"
+                (click)="onChangeTBtns('addtestusdt')">Add Test USDT to MetaMask</button>
+            </li>
+            <li>
+                <br /><button class = "USDTFaucet"
+                (click)="onChangeTBtns('testusdt')">Get Test USDT from Faucet</button>
+            </li> 
+<br /><br />
+        </ul>
+    </div> -->
+  <br /><br /><br />
+  <div class="newSteps" style="position: relative; text-align: center">
+    <h2 class="stepsHeading"><span class="highlight">Steps</span> to Test</h2>
+    <p class="stepsHeading">
+      Follow these <span class="highlight">steps to test</span> our web app and
+      have a hassle free experience.
+    </p>
+    <br />
+    <div class="stepOne">
+      <div class="stepOneHeading"><h3>Step 1</h3></div>
+      <br />
+      <div class="stepOneBody">
+        <p class="stepOneBodyText">
+          First step is to add
+          <span class="highlight">Polygon Mumbai testnet</span> to your MetaMask
+          wallet, and change your active network.
+        </p>
+        <button class="stepOneButton" (click)="onChangeTBtns('addnetwork')">
+          Add Polygon to MetaMask
+        </button>
+      </div>
+      <br />
+    </div>
+    <div class="stepTwo">
+      <div class="stepTwoHeading">
+        <h3 style="position: relative; top: 32px">Step 2</h3>
+      </div>
+      <br />
+      <div class="stepTwoBody">
+        <p class="stepTwoBodyText">
+          It's easy to test using custom Test USDT. This step allows you to view
+          the custom token in your wallet.
+        </p>
+        <button class="stepTwoButton" (click)="onChangeTBtns('addtestusdt')">
+          Add Test USDT to MetaMask
+        </button>
+      </div>
+      <br />
+    </div>
+    <div class="stepThree">
+      <div class="stepThreeHeading"><h3>Step 3</h3></div>
+      <br />
+      <div class="stepThreeBody">
+        <p class="stepThreeBodyText">
+          Now, receive 1,000 USDT from our faucet to Buy Bonds and test other
+          features.
+        </p>
+        <button class="stepThreeButton" (click)="onChangeTBtns('testusdt')">
+          Get Test USDT
+        </button>
+      </div>
+      <br />
+    </div>
+  </div>
+
+  <!-- <img src="../../../../../assets/images/ellipse.png" class="elipse"> -->
+  <div id="overlay" (click)="turnOffOverlay()">
+    <p class="overlayText" id="lendText">
+      Bonds give access to high and stable yield investment opportunities
+      secured by emerging market real world assets.
+    </p>
+    <p class="overlayText" id="borrowText">
+      Borrowers avail loans against the security of their assets stored with
+      partner custodian warehouses/vaults and tokenized on the Blockchain
+      network.
+    </p>
+  </div>
+</div>
+
+<!-- <div>
+    <img src="../../../../../assets/images/ellipse.png" class="elipse">
+    <div id="overlay" (click)="turnOffOverlay()">
+
+        <p class="overlayText" id="lendText">Lenders deposit their stablecoins to the lending pool to earn high and
+            stable yield by lending against Real World Assets.</p>
+        <p class="overlayText" id="borrowText">Borrowers avail loans against the security of their assets stored with
+            partner custodian warehouses/vaults and tokenized on the Blockchain network.</p>
+    </div>
+    <div class="row" style="position: absolute;
+    left: 15%;">
+        <div class="box">
+            <img src="../../../../../assets/images/peep-19.png">
+           
+            <p class="btnT" (click)="lendBtn()">Lend</p><i class="fa fa-info infoIcon"
+                (click)="showOverlayMessage('lend')"></i>
+        </div>
+        <div class="box">
+            <img src="../../../../../assets/images/peep-35.png">
+            
+            <p class="btnT" (click)="borrowBtn()">Borrow</p><i class="fa fa-info infoIcon"
+                (click)="showOverlayMessage('borrow')"></i>
+        </div>
+        
+    </div>
+</div> -->

@@ -1,0 +1,169 @@
+<div class="header">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light navBsty">
+    <div class="container-fluid">
+      <a href="/" class="navbar-brand"
+        ><img src="../../../../assets/bruFinanceLogo.png" class="logoImg"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mynavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav" *ngIf="started && !connected">
+          <li class="nav-item">
+            <a [routerLink]="['/home']" class="nav-link aListSty" href="#"
+              >Back</a
+            >
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto" *ngIf="connected">
+          <li class="nav-item test">
+            <select
+              class="selectSty testBtn"
+              name="testbtns"
+              [ngModel]="testBtns"
+              (ngModelChange)="onChangeTBtns($event)"
+            >
+              <option value="" disabled selected>Test okoko  Suite</option>
+              <option value="addnetwork">Add Polygon Network</option>
+              <option value="addtestusdt">Add Test T to MetaMask</option>
+              <option value="testusdt">Get Test USDT</option>
+            </select>
+          </li>
+          <!-- <li class="nav-item test">
+            <select
+              class="selectSty testBtn"
+              name="switchNetwork"
+              [ngModel]="switchNetwork"
+              (ngModelChange)="onChangeNetwork($event)"
+            >
+              <option value="" disabled selected>Network Test</option>
+              <option value="0x13881">Polygon  Mumbai</option>
+              <option value="0x4">Ethereum Rinkeby</option>
+            </select>
+          </li> -->
+
+          <li class="nav-item sadhohsuda">
+            <a
+              [routerLink]="['/home/my-transactions']"
+              class="nav-link aListSty headerLink"
+              href="#"
+              >My Transactions</a
+            >
+          </li>
+          <!-- <li class="nav-item">
+            <a [routerLink]="['/home']" class="nav-link aListSty2" href="#">How it works</a>
+          </li> -->
+          <!-- <li class="nav-item selectLB">
+            <select class="selectSty" name="pageName" [ngModel]="selectedPage" (ngModelChange)="onChange($event)">
+              <option value="" disabled selected>--Select--</option>
+              <option value="lend">Buy Bonds</option>
+              <option value="borrow">Borrow</option>
+            </select>
+          </li> -->
+        </ul>
+        <!-- <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Link</a>
+          </li>
+        </ul> -->
+        <!-- <div *ngIf="connected" class="divLBtn d-flex">
+          <button (click)="onLogout()" class="btn logoutbtn">Logout</button>
+        </div> -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- <nav class="navbar navbar-expand-sm navbar-light bg-light" style="height: 67px;">
+  <div class="container-fluid">
+    <a class="navbar-brand" ><img src="https://bru.finance/images/brufinanceLogo.png" class="logoImg"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto" *ngIf="started && !connected">
+        <li class="nav-item">
+          <a [routerLink]="['/home']" class="nav-link aListSty" href="#">Back</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav" *ngIf="connected">
+        <li class="nav-item">
+          <select class="selectSty testBtn"  name="testbtns" [ngModel]="testBtns" (ngModelChange)="onChangeTBtns($event)">
+            <option value="" disabled selected>Test</option>
+            <option value="addtestusdt">Add Test USDT to MetaMask</option>
+            <option value="testusdt">Get Test USDT</option>
+          </select>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/home/my-transactions']" class="nav-link aListSty  " href="#">My Transactions</a>
+        </li>
+        <li class="nav-item ">
+          <a [routerLink]="['/home']" class="nav-link aListSty" href="#">How it works</a>
+        </li>
+        <li class="nav-item">
+          <select class="selectSty" name="pageName" [ngModel]="selectedPage" (ngModelChange)="onChange($event)">
+            <option value="" disabled selected>--Select--</option>
+            <option value="lend">Lend</option>
+            <option value="borrow">Borrow</option>
+          </select>
+        </li>
+        <li>
+          <div *ngIf="connected" class="d-flex divLBtn">
+            <button (click)="onLogout()" class="btn logoutbtn">Logout</button>
+          </div>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> -->
+
+  <!-- <nav class="navbar navbar-expand-lg navbar-light navBsty" style="height: 67px;">
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav" style="display: contents !important;">
+      <img src="https://bru.finance/images/brufinanceLogo.png" class="logoImg">
+      <ul class="navbar-nav" *ngIf="started && !connected">
+        <li class="nav-item">
+          <a [routerLink]="['/home']" class="nav-link aListSty" href="#">Back</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav" *ngIf="connected">
+        <li class="nav-item">
+          <select class="selectSty testBtn" name="testbtns" [ngModel]="testBtns" (ngModelChange)="onChangeTBtns($event)">
+            <option value="" disabled selected>Test</option>
+            <option value="addtestusdt">Add Test USDT to MetaMask</option>
+            <option value="testusdt">Get Test USDT</option>
+          </select>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/home/my-transactions']" class="nav-link aListSty" href="#">My Transactions</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/home']" class="nav-link aListSty" href="#">How it works</a>
+        </li>
+        <li class="nav-item">
+          <select class="selectSty" name="pageName" [ngModel]="selectedPage" (ngModelChange)="onChange($event)">
+            <option value="" disabled selected>--Select--</option>
+            <option value="lend">Lend</option>
+            <option value="borrow">Borrow</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="connected" class="divLBtn">
+      <button (click)="onLogout()" class="btn logoutbtn">Logout</button>
+    </div>
+  </nav>  -->
+</div>

@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col">
+        <p class="connectWithUs"><span class="highlight"> Connect </span> your <span class="highlight"> wallet </span>
+        </p>
+        <!-- <p class="desText"><span>Simple</span>, <span>Safe</span> & <span>Secure</span><br>
+            Many <span>advantages</span> and<br>
+            you can do lot <span>more stuffs</span></p> -->
+        <p class="BottomNote" style="font-size: 20px;
+            margin-bottom: 5px;color: black;
+            margin-top: 6%;">Total Number of Depositors : <span class="highlight" style="font-weight: 400;">{{
+                totalAssets }}</span>
+        </p>
+        <p class="BottomNote" style="font-size: 20px;color: black;
+            margin-bottom: 6px;">Total Value of Assets : <span class="highlight" style="font-weight: 400;">$ {{
+                numberWithCommas(totalAssetsValueMinted)}}</span>
+        </p>
+        <p class="BottomNote" style="font-size: 17px;"> <a style="color: #7C037B;"
+                href="https://mumbai.polygonscan.com/token/0xBD23D4020c02886b459379386D07b03fB18bEa92"
+                target="_blank">Check Assets on the Polygon Network</a></p>
+        <p class="metamask" (click)="connectMetamask()"><img src="../../../../../assets/images/metamask.png"> MetaMask
+        </p>
+        <br>
+        <p class="metamask" (click)="walletConnect()"> WalletConnect </p>
+        <!-- <p class="walletConnect"><img src="../../../../../assets/images/walletconnect.png"> WalletConnect</p> -->
+        <p class="BottomNote">*Support for more wallets coming soon</p>
+    </div>
+    <div class="col">
+        <img src="../../../../../assets/images/Vector8.png" class="smallImage">
+        <img src="../../../../../assets/images/connectPage.png" class="bigImage">
+    </div>
+</div>

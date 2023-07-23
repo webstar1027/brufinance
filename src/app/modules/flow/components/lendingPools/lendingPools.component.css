@@ -1,0 +1,928 @@
+.mainTitle {
+    font-size    : 35px;
+    text-align   : center;
+    margin       : 3% 0;
+    margin-bottom: 15px;
+}
+
+.subTitle {
+    margin-bottom: 0;
+    text-align   : center;
+}
+
+.highlight {
+    color: #7C037B;
+}
+
+.mainDivSection {
+    margin    : 5% 10%;
+    margin-top: 2%;
+}
+
+.alltabs {
+    margin-right  : 12px;
+    width         : 19%;
+    display       : inline-block;
+    background    : #A670C026;
+    padding       : 13px;
+    border-radius : 6px;
+    color         : #540F7A;
+    text-align    : center;
+    font-weight   : 500;
+    cursor        : pointer;
+    padding-bottom: 17px;
+    margin-bottom : 0;
+}
+
+.alltabs:hover {
+    background-color: #540F7A;
+    color           : white;
+}
+
+.active {
+    background-color: #540F7A;
+    color           : white;
+}
+
+.sectionDiv {
+    border                 : 2px solid #e9e9e9;
+    border-top-left-radius : 14px;
+    border-top-right-radius: 14px;
+    padding                : 10px;
+    margin-top             : -4px;
+    background-color       : white;
+    z-index                : 10;
+    position               : relative;
+    height                 : 430px;
+}
+
+.active {
+    background-color: #540F7A !important;
+    color           : white !important;
+}
+
+.section1p {
+    text-align: center;
+    margin    : 2% 0;
+    margin-top: 1%;
+}
+
+.theadd {
+    background-color: #f0e2f6;
+    text-align      : left;
+    height          : 49px;
+    border-radius   : 6px;
+}
+
+table th:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+table th:last-child {
+    border-radius: 0 6px 6px 0;
+}
+
+th,
+tbody {
+    text-align: center;
+}
+
+th {
+    font-weight: 400;
+}
+
+.sNoTh {
+    padding-left: 25px;
+}
+
+tr {
+    background-color: #a670c00f;
+    height          : 45px;
+    margin          : 10px 0;
+}
+
+table tr:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+table tr:last-child {
+    border-radius: 0 6px 6px 0;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing : 0 5px;
+}
+
+table tbody {
+    display   : block;
+    max-height: 285px;
+    overflow-y: scroll;
+}
+
+table thead,
+table tbody tr {
+    display     : table;
+    width       : 100%;
+    table-layout: fixed;
+}
+
+.leftSectionWallet {
+    background-color: #f2eaf6;
+    height          : 337px;
+    padding         : 15px;
+    border-radius   : 8px;
+    margin-bottom   : 30px;
+}
+
+.rightSectionWalletTop {
+    background-color: #f2eaf6;
+    height          : 337px;
+    padding         : 15px;
+    border-radius   : 8px;
+    margin-bottom   : 25px;
+}
+
+.rightSectionWalletBottom {
+    background-color: #f2eaf6;
+    padding         : 17px 15px;
+    border-radius   : 8px;
+    vertical-align  : middle;
+}
+
+.mb00 {
+    margin-bottom: 0;
+}
+
+.connectedText {
+    background-color: #86df86;
+    padding         : 5px 12px;
+    float           : right;
+    border-radius   : 20px;
+    font-size       : 10px;
+    font-weight     : 500;
+}
+
+.walletAddress {
+    color        : grey;
+    font-size    : 12px;
+    margin-bottom: 2px;
+}
+
+.addressField {
+    background-color: white;
+    padding         : 8px;
+    margin-top      : 10px;
+    border-radius   : 5px;
+    font-size       : 14px;
+    color           : #7C037B;
+    letter-spacing  : 0.2px;
+}
+
+.copyIcon {
+    float                     : right;
+    padding                   : 8px 12px;
+    cursor                    : pointer;
+    margin-top                : -8px;
+    box-shadow                : 0 0 5px 1px #dddddd;
+    margin-right              : -8px;
+    border-top-right-radius   : 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.copyIcon:hover {
+    box-shadow: 0 0 5px 1px #b9b9b9;
+}
+
+.checkBoxLowBalance {
+    position  : absolute;
+    margin-top: 7px;
+}
+
+.hideLowBal {
+    display     : inline-block;
+    font-size   : 13px;
+    padding-left: 19px;
+    color       : #5d5d5d;
+}
+
+.walletDiv {
+    background-color: white;
+    padding         : 10px;
+    height          : 147px;
+    overflow        : scroll;
+    border-radius   : 8px;
+}
+
+.walletList {
+    font-size       : 13px;
+    margin-bottom   : 5px;
+    padding         : 12px;
+    padding-left    : 10px;
+    border-radius   : 3px;
+    background-color: #a670c00d;
+}
+
+.walletListSpan {
+    float: right;
+}
+
+.expandIcon {
+    font-size  : 18px;
+    margin-left: 7px;
+    color      : #55237a;
+    cursor     : pointer;
+}
+
+.lendMoreBtnTable {
+    color : #540F7A;
+    cursor: pointer;
+}
+
+.lendMoreBtnTable:hover {
+    font-size: 17px;
+}
+
+.deposit-modal {
+    padding: 0;
+}
+
+.lendMoreModalHeading {
+    padding                : 18px;
+    border-top-left-radius : 15px;
+    border-top-right-radius: 15px;
+    text-align             : center;
+    background-color       : #1f1f1f21;
+    font-size              : 20px;
+}
+
+.lendModalDivSection {
+    margin          : 12px;
+    background-color: #a670c01a;
+    padding         : 15px 0px;
+    border-radius   : 10px;
+}
+
+.lendModalDivSectionCol {
+    padding: 0;
+}
+
+li {
+    font-size: 14px;
+}
+
+.ul2 {
+    padding-left: 15px
+}
+
+ul {
+    margin-bottom: 0;
+}
+
+.pSubHead {
+    margin-bottom: 5px;
+    color        : grey;
+    font-size    : 14px;
+    padding-left : 11px;
+}
+
+.inputBoxes {
+    padding      : 11px;
+    font-size    : 17px;
+    width        : 100%;
+    color        : #832b81;
+    border-radius: 6px;
+    border       : 1px solid #bcbcbc;
+}
+
+.inputAmount {
+    padding   : 9px;
+    text-align: right;
+    font-size : 17px;
+}
+
+.inputBoxes {
+    outline: none;
+}
+
+.pStyDes {
+    font-size    : 15px;
+    color        : #505050;
+    margin-bottom: 5px;
+    padding      : 2px 18px;
+}
+
+.pStyDes span {
+    float: right;
+}
+
+.borderBottom {
+    border-bottom : 1px solid #8d8d8d;
+    padding-bottom: 10px;
+}
+
+.borderBottomS {
+    border-bottom : 0;
+    padding-bottom: 1px;
+    margin-bottom : 0;
+}
+
+.buttonsmodal {
+    padding      : 10px;
+    border       : 1px solid #7C037B;
+    text-align   : center;
+    font-weight  : 500;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    cursor       : pointer;
+}
+
+.cancelBtn {
+    background-color: white;
+    color           : #7C037B;
+}
+
+.lendNowBtn {
+    background-color: #7C037B;
+    color           : white;
+}
+
+.collapseUpper {
+    height: 55px !important;
+}
+
+.expandUpper {
+    height: 254px !important;
+}
+
+.modalPText {
+    padding-left: 10px;
+    font-size   : 17px;
+}
+
+.successModaldiv {
+    background-color: #efe5f4;
+    margin          : 20px 14px;
+    border-radius   : 10px;
+    padding         : 7px;
+}
+
+.successModaldivP {
+    background-color: #d9c2e4;
+}
+
+.successModaldivPSuccess {
+    background-color: #d7efcc;
+    margin          : 20px 14px;
+    border-radius   : 10px;
+    padding         : 7px;
+}
+
+
+.depositSuccessModalPL {
+    padding      : 6px 21%;
+    font-size    : 19px;
+    margin-bottom: 0;
+    text-align   : left;
+    padding-right: 5%;
+    word-spacing : 1px;
+    padding-top  : 19px;
+}
+
+.depositSUccessPIcon {
+    font-size : 46px;
+    color     : #51b02b;
+    margin-top: 11px;
+    position  : absolute;
+    left      : 70px;
+}
+
+.successModalPT {
+    background-color: #a670c021;
+    text-align      : center;
+    border-radius   : 4px;
+    padding         : 14px;
+    font-size       : 18px;
+    margin-bottom   : 0;
+}
+
+.successModalMDiv {
+    background-color: white;
+    padding         : 8px;
+    border-radius   : 4px;
+    margin          : 15px;
+    margin-top      : 5%;
+}
+
+.sssssssssSS {
+    text-align: center;
+    margin    : 18px;
+}
+
+.cPP {
+    cursor: pointer;
+}
+
+.notransmsg {
+    padding     : 0;
+    text-align  : center;
+    color       : grey;
+    font-size   : 19px;
+    word-spacing: 2px;
+    padding-top : 16%;
+    padding-left: 14%;
+}
+
+.sadFaceIcon {
+    font-size  : 48px;
+    position   : absolute;
+    margin-left: -13%;
+    margin-top : -9px;
+    color      : #a7a7a7;
+}
+
+.divMainBar {
+    margin       : 15px 51px;
+    border       : 1px solid #d0d0d0;
+    border-radius: 10px;
+}
+
+.barPSty {
+    color           : black;
+    margin          : 8px;
+    background-color: #a670c01f;
+    padding         : 16px 20px;
+    border-radius   : 7px;
+}
+
+.col-4 {
+    padding: 0 !important;
+}
+
+.checkOnPolyBtn {
+    color           : black;
+    margin          : 8px;
+    background-color: #d3c5d91f;
+    padding         : 15px 20px;
+    border-radius   : 7px;
+    border          : 1px solid #dddddd;
+    cursor          : pointer;
+}
+
+.usdtbtns {
+    margin          : 0 auto;
+    background-color: #f4eef7;
+    color           : black;
+    padding         : 7px 19px;
+    border-radius   : 6px;
+    border          : 1px solid #7e297b;
+    font-size       : 15px;
+    margin          : 0 15px;
+}
+
+.usdtbtns:hover {
+    background-color: #7e297b;
+    color           : white;
+}
+
+input[type='radio'] {
+    -webkit-appearance   : none;
+    width                : 20px;
+    height               : 20px;
+    border               : 1px solid darkgray;
+    border-radius        : 50%;
+    outline              : none;
+    /* box-shadow        : 0 0 5px 0px gray inset; */
+}
+
+input[type='radio']:hover {
+    box-shadow: 0 0 5px 0px orange inset;
+}
+
+input[type='radio']:before {
+    content      : '';
+    display      : block;
+    width        : 65%;
+    height       : 65%;
+    margin       : 3px;
+    border-radius: 50%;
+}
+
+input[type='radio']:checked:before {
+    background: #7e297b;
+}
+
+.pRadioBtns {
+    display     : inline-block;
+    width       : 100%;
+    padding-left: 30px;
+    position    : relative;
+    color       : #7e297b;
+    font-size   : 15px;
+}
+
+label {
+    width: 40.33%;
+}
+
+.inputRadioBtns {
+    position  : absolute;
+    margin-top: 2px;
+    left      : 0;
+}
+
+.lendMoreModalTsSty {
+    margin       : 15px;
+    margin-top   : 20px;
+    border       : 1px solid #bcbcbc;
+    border-radius: 6px;
+    padding      : 8px 0;
+}
+
+hr {
+    height          : 31px;
+    background-color: white;
+    overflow        : hidden;
+    width           : 100%;
+    z-index         : 1;
+    position        : relative;
+    margin-top      : -23px !important;
+    border          : 0 !important;
+    border-top      : 0px dotted rgba(0, 0, 0, .1) !important;
+}
+
+hr:after {
+    content       : "--------------------------------------------------------------------------";
+    letter-spacing: 8px;
+    color         : grey;
+    margin-top    : 1px;
+}
+
+.morePoolsMsg {
+    color           : grey;
+    text-align      : center;
+    font-size       : 15px;
+    background-color: white;
+    width           : 30%;
+    margin          : 0 auto;
+    margin-top      : 6%;
+    z-index         : 100;
+    position        : relative;
+}
+
+.buttonOnLendTable {
+    padding-left: 24px !important;
+}
+
+.lendToggle {
+    float                    : right;
+    position                 : relative;
+    bottom                   : 108px;
+    right                    : 220px;
+    /* padding               : 14px; */
+    width                    : 60%;
+    /* display               : inline-block; */
+    color                    : white;
+    /* border-radius         : 5px; */
+    text-align               : center;
+    margin-right             : 24px;
+    font-size                : 18px;
+    cursor                   : pointer;
+    padding                  : 14px;
+    /* background-color      : #eee2f2;
+    color                    : #7b037b; */
+    border                   : #7b037b;
+    width                    : auto;
+    margin-left              : 120px;
+    margin-top               : 35px;
+    border-top-left-radius   : 5px;
+    border-bottom-left-radius: 5px;
+    background-color         : #7b037b;
+    color                    : white;
+}
+
+.borrowToggleInactive {
+    float                     : right;
+    position                  : relative;
+    bottom                    : 124px;
+    right                     : -123px;
+    /* padding                : 14px; */
+    width                     : 60%;
+    /* display                : inline-block; */
+    color                     : white;
+    /* border-radius          : 5px; */
+    text-align                : center;
+    margin-right              : 24px;
+    font-size                 : 18px;
+    cursor                    : pointer;
+    padding                   : 14px;
+    background-color          : #eee2f2;
+    color                     : #7b037b;
+    border                    : #7b037b;
+    border                    : 2px;
+    width                     : auto;
+    margin-left               : 120px;
+    margin-top                : 35px;
+    border-top-right-radius   : 5px;
+    border-bottom-right-radius: 5px;
+    /* z-index                : -1; */
+}
+
+/* .lendToggle:hover {
+    background-color: #7b037b;
+    color: white;
+  } */
+
+.borrowToggleInactive:hover {
+    background-color: #7b037b;
+    color           : white;
+}
+
+/* <===================================================================================> */
+
+@media (min-width:1024px) {}
+
+
+@media (min-width:769px) and (max-width:1023px) {}
+
+
+
+@media (max-width:768px) {}
+
+@media (max-width:468px) {
+    .col-4 {
+        flex     : unset;
+        max-width: unset;
+    }
+
+    .barPSty {
+        width    : unset;
+        font-size: 13px;
+    }
+
+    .checkOnPolyBtn {
+        width    : unset;
+        font-size: 14px;
+    }
+
+    .alltabs {
+        margin-right: 7px;
+        width       : 29%;
+        padding     : 6px;
+        font-size   : 11px;
+    }
+
+    .theadd {
+        text-align: center;
+        font-size : 10;
+    }
+
+    tbody tr {
+        display     : table;
+        width       : 100%;
+        table-layout: unset;
+        font-size   : 11px;
+    }
+
+    th {
+        font-weight: 500;
+        font-size  : 12px;
+    }
+
+    .morePoolsMsg {
+        width    : 50%;
+        font-size: 10px;
+
+    }
+
+    .sectionDiv {
+        padding    : 1px;
+        margin-top : -4px;
+        width      : 121%;
+        margin-left: -35px;
+    }
+
+    .col-6 {
+        flex     : unset;
+        max-width: unset;
+    }
+
+    .pRadioBtns {
+        padding-left: 26px;
+        font-size   : 10px;
+        margin      : 5px;
+        margin-top  : 31px;
+    }
+
+    .addressField {
+        font-size: 10px;
+
+    }
+
+    .inputRadioBtns {
+        margin-top: -3px;
+
+    }
+
+    .section1p {
+        margin-top: 3%;
+    }
+
+    table th:first-child {
+        border-radius: 6px 0 0 6px;
+        display      : none;
+    }
+
+    table tr td:first-child {
+        display: none;
+    }
+
+}
+
+
+.inputP {
+    background-color: rgb(196 196 196 / 54%);
+    color           : black;
+    padding         : 12px 8px;
+    border-radius   : 8px;
+    position        : relative;
+    margin-top      : 5px;
+}
+
+.imgSS {
+    border-right : 1px solid #707070;
+    padding-right: 15px;
+    width        : 40px;
+    position     : absolute;
+    left         : 21px;
+    top          : 12px;
+}
+
+.bondsTitle {
+    margin-bottom: 0;
+    font-size    : 15px;
+    padding-left : 3px;
+}
+
+.viewMB {
+    color          : #bc4cf4;
+    font-size      : 12px;
+    text-align     : center;
+    text-decoration: underline;
+    cursor         : pointer;
+    margin-top     : 10px;
+}
+
+.tradetitle {
+    font-size    : 15px;
+    margin-bottom: 5px;
+    color        : #5a5a5a;
+}
+
+.tradeInput {
+    width        : 100%;
+    border       : 1px solid grey;
+    border-radius: 6px;
+    padding      : 8px;
+    margin-bottom: 15px;
+    font-size    : 14px;
+}
+
+.poolDText {
+    text-align      : center;
+    font-size       : 13px;
+    background-color: #ecdcf3;
+    padding         : 10px 5px;
+    margin          : 0 4px;
+    margin-bottom   : 8px;
+    border-radius   : 4px;
+}
+
+.poolDText2 {
+    text-align      : center;
+    font-size       : 13px;
+    background-color: #f4ebf8;
+    padding         : 10px 5px;
+    margin          : 0 4px;
+    margin-bottom   : 8px;
+    border-radius   : 4px;
+}
+
+.asbdksuiyGUy {
+    margin          : 0;
+    font-size       : 14px;
+    height          : 32px;
+    background-color: white;
+}
+
+.asduTYUti span {
+    display   : inline-block;
+    text-align: center;
+}
+
+.asduyiu {
+    font-size    : 13px;
+    margin-bottom: 14px;
+}
+
+.asduyiu span {
+    display: inline-block;
+}
+
+.comOthers {
+    color: #81d8d8;
+}
+
+.comGram {
+    color: #f29cb3;
+}
+
+.comTurmeric {
+    color: #79c6f1;
+}
+
+.comWheat {
+    color: #fce190;
+}
+
+.comRice {
+    color: #aeaeae;
+}
+
+.providerText {
+    /* width: 188px; */
+    width           : max-content;
+    height          : 28px;
+    left            : 516px;
+    top             : 785px;
+    float           : right;
+    background-color: white;
+    /* margin-right : 12px; */
+    border-radius   : 15px;
+    padding-right   : 12px;
+    padding-left    : 12px;
+    padding-top     : 2px;
+    color           : #9f87a3;
+    text-align      : center;
+    margin-right    : 10px;
+    font-size       : 14px;
+}
+
+/* .poolActivity {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 263px;
+    top: 902px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background: #3DEE44;
+} */
+
+.poolActivity {
+    margin-right: 8px;
+    font-size   : 12px;
+    color       : #3DEE44
+}
+
+.buyBonds_Btn {
+    position                  : absolute;
+    right                     : 19%;
+    top                       : -75px;
+    color                     : white;
+    background-color          : #55237a;
+    border                    : none;
+    padding                   : 14px 21px;
+    /* border-radius          : 0px; */
+    font-size                 : 15px;
+    font-weight               : 600;
+    cursor                    : pointer;
+    width                     : 130px;
+    border-top-left-radius    : 5px;
+    border-bottom-left-radius : 5px;
+}
+
+.borrow_Btn {
+    position                  : absolute;
+    right                     : 10%;
+    top                       : -75px;
+    border                    : none;
+    padding                   : 14px 21px;
+    /* border-radius          : 0px; */
+    background-color          : #ecdcf3;
+    color                     : #55237a;
+    font-size                 : 15px;
+    font-weight               : 600;
+    cursor                    : pointer;
+    width                     : 130px;
+    border-top-right-radius   : 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.loaderForWalletTransactions {
+    text-align : center;
+    padding-top: 15%;
+    color      : grey;
+    font-size  : 20px;
+}

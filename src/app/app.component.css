@@ -1,0 +1,43 @@
+:host {
+  /* display: flex;
+  flex-direction: column;
+  position: absolute; */
+  top   : 0;
+  bottom: 0;
+  left  : 0;
+  right : 0;
+}
+
+.overlayforMobDev {
+  position  : absolute;
+  height    : 100%;
+  width     : 100%;
+  background: #808080b8;
+  z-index   : 1000;
+}
+
+.overlayforMobDev p {
+  position               : absolute;
+  bottom                 : 0;
+  margin-bottom          : 0;
+  background-color       : white;
+  color                  : black;
+  height                 : 30%;
+  font-size              : 17px;
+  width                  : 100%;
+  text-align             : center;
+  padding-top            : 8%;
+  border-top-left-radius : 10px;
+  border-top-right-radius: 10px;
+}
+
+.bruLogoOverlay {
+  width        : 120px;
+  display      : block;
+  margin       : 0 auto;
+  margin-bottom: 5%;
+}
+
+.highlight {
+  color: #7C037B;
+}

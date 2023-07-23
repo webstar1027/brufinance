@@ -1,0 +1,337 @@
+<div class="mainCard">
+  <img class="imageCard" src="../../../../../assets/nft/{{img}}.jpg">
+  <p class="cardTitle">{{nft.commodity}}</p>
+  <p class="cardCard">Quantity : <span class="lightColorTheme spanMainCard">{{nft.quantity}} KGs</span></p>
+  <p class="cardCard">Value : <span class="lightColorTheme spanMainCard">
+      {{convertDollarToMatic(borrowForm.value.price)}} MATIC ( $ {{borrowForm.value.price}} )</span></p>
+  <p class="mainBtn" (click)="handleSubmitBorrow()" *ngIf="!nft.borrowed">Borrow</p>
+  <p class="repayBtn" (click)="handleSubmitRepay()" *ngIf="!nft.repayed && nft.borrowed">Repay</p>
+  <div class="Button" *ngIf="!readOnly">
+    <!-- <button *ngIf="!nft.borrowed" [disabled]="borrowForm.invalid || nft.borrowed" type="submit" class="btn btn-primary"
+      btn-lg btn-block>BORROW</button> -->
+  </div>
+  <div class="Button" *ngIf="!nft.repayed && nft.borrowed">
+    <!-- <button [disabled]="borrowForm.invalid || nft.repayed" type="submit" name="" id="" class="btn btn-primary" btn-lg
+      btn-block>REPAY</button> -->
+  </div>
+</div>
+
+<!-- 
+<form [formGroup]="borrowForm" (ngSubmit)="nft.borrowed ? handleSubmitRepay() : handleSubmitBorrow()">
+  <div class="Card  text-left ">
+    <img class="img" src="../../../../../assets/nft/{{img}}.jpg">
+    <div class="row val">
+      <div class="col name" for="nftId">
+        NFT ID
+      </div>
+      <div class="col-7 value">
+        <input type="readonly" class="form-control-plaintext" id="nftId" formControlName="nftId">
+      </div>
+    </div>
+
+    <div class="row val">
+      <div class="col name" for="commodity">
+        Commodity
+      </div>
+      <div class="col-7 value">
+        <input type="text" readonly class="form-control-plaintext" id="commodity" formControlName="commodity" />
+      </div>
+    </div>
+
+    <div class="row val">
+      <div class="col name" for="quantity">
+        Quantity
+      </div>
+      <div class="col-7 value">
+        <input type="text" readonly class="form-control-plaintext" id="quantity" formControlName="quantity" />
+      </div>
+    </div>
+
+    <div class="row val">
+      <div class="col name" for="price">
+        Price
+      </div>
+      <div class="col-7 value">
+        <input type="text" readonly class="form-control-plaintext" id="price"
+          [value]="borrowForm.value.price | currency: 'USD'" />
+      </div>
+    </div>
+
+    <div class="row val" *ngIf="!nft.borrowed">
+      <div class="col name">
+        Borrow Amount
+      </div>
+      <div class="col-7 value">
+        <input [type]="nft.borrowed || readOnly ? 'text' : 'number'" [ngClass]="
+              nft.borrowed || readOnly
+                ? 'form-control-plaintext'
+                : 'form-control-plaintext'
+            " [readonly]="true" id="borrowAmount" formControlName="borrowAmount" />
+        <ng-container *ngIf="
+            !nft.borrowed &&
+            borrowForm.controls.borrowAmount.errors &&
+            (borrowForm.controls.borrowAmount.touched ||
+              borrowForm.controls.borrowAmount.dirty)
+          ">
+          <p class="text-danger">
+            <ng-container *ngIf="borrowForm.controls.borrowAmount.errors.required">
+              Borrow Amount is required
+            </ng-container>
+            <ng-container *ngIf="borrowForm.controls.borrowAmount.errors.min">
+              Borrow Amount must not be less than
+              {{
+              borrowForm.controls.borrowAmount.errors.min.min
+              | currency: "USD"
+              }}
+            </ng-container>
+            <ng-container *ngIf="borrowForm.controls.borrowAmount.errors.max">
+              Borrow Amount must not be more than
+              {{
+              borrowForm.controls.borrowAmount.errors.max.max
+              | currency: "USD"
+              }}
+              (70% of the price amount)
+            </ng-container>
+          </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="row val">
+      <div class="col name" for="borrowStatus">
+        Borrow Status
+      </div>
+      <div class="col-7 value">
+        <input type="text" readonly class="form-control-plaintext" id="borrowStatus"
+          [value]="nft.borrowed ? 'Pledged' : 'Available to Borrow'" />
+      </div>
+    </div>
+
+    <div class="row val">
+      <div class="col name" for="amountBorrowed">
+        Amount Borrowed
+      </div>
+      <div class="col-7 value">
+        <input type="text" readonly class="form-control-plaintext" id="amountBorrowed"
+          formControlName="amountBorrowed" />
+      </div>
+    </div>
+
+    <div class="row val" *ngIf="nft.borrowed">
+      <div class="col name" for="amountBorrowed">
+        Repayment Amount
+      </div>
+      <div class="col-7 value">
+        <input type="text" readonly class="form-control-plaintext" id="amountBorrowed"
+          formControlName="amountBorrowed" />
+      </div>
+    </div>
+
+    <div class="row val" *ngIf="!nft.repayed && nft.borrowed">
+      <div class="col name" for="repayAmount">
+        Repay Amount
+      </div>
+      <div class="col-7 value">
+        <input [type]="nft.repayed || readOnly ? 'text' : 'text'" [ngClass]="
+        nft.repayed || readOnly
+          ? 'form-control-plaintext'
+          : 'form-control-plaintext'
+      " [readonly]="true" id="repayAmount" formControlName="repayAmount" />
+        <ng-container *ngIf="
+        !nft.repayed &&
+        borrowForm.controls.repayAmount.errors &&
+        (borrowForm.controls.repayAmount.touched ||
+          borrowForm.controls.repayAmount.dirty)">
+          <p class="text-danger">
+            <ng-container *ngIf="borrowForm.controls.repayAmount.errors.required">
+              Repay Amount is required
+            </ng-container>
+            <ng-container *ngIf="borrowForm.controls.repayAmount.errors.min">
+              Repay Amount must not be less than
+              {{
+              borrowForm.controls.repayAmount.errors.min.min
+              | currency: "USD"
+              }}
+            </ng-container>
+            <ng-container *ngIf="borrowForm.controls.repayAmount.errors.max">
+              Repay Amount must not be more than
+              {{
+              borrowForm.controls.repayAmount.errors.max.max
+              | currency: "USD"
+              }}
+            </ng-container>
+          </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="row val" *ngIf="nft.borrowed && nft.repayed">
+      <div class="col name" for="amountRepayed">
+        Amount Repayed
+      </div>
+      <div class="col-7 value">
+        <input type="text" readonly class="form-control-plaintext" id="amountRepayed" formControlName="amountRepayed" />
+      </div>
+    </div>
+  </div>
+  <div class="Button" *ngIf="!readOnly">
+    <button *ngIf="!nft.borrowed" [disabled]="borrowForm.invalid || nft.borrowed" type="submit" class="btn btn-primary"
+      btn-lg btn-block>BORROW</button>
+  </div>
+  <div class="Button" *ngIf="!nft.repayed && nft.borrowed">
+    <button [disabled]="borrowForm.invalid || nft.repayed" type="submit" name="" id="" class="btn btn-primary" btn-lg
+      btn-block>REPAY</button>
+  </div>
+</form> -->
+
+
+
+
+
+<!-- <div class="card">
+  <div class="card-body">
+    <form [formGroup]="borrowForm" (ngSubmit)="nft.borrowed ? handleSubmitRepay() : handleSubmitBorrow()">
+      <div class="form-group row mb-0">
+        <label for="nftId" class="col-sm-4 col-form-label">NFT ID</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="nftId" formControlName="nftId" />
+        </div>
+      </div>
+
+      <div class="form-group row mb-0">
+        <label for="commodity" class="col-sm-4 col-form-label">Commodity</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="commodity" formControlName="commodity" />
+        </div>
+      </div>
+      <div class="form-group row mb-0">
+        <label for="quantity" class="col-sm-4 col-form-label">Quantity</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="quantity" formControlName="quantity" />
+        </div>
+      </div>
+      <div class="form-group row mb-0">
+        <label for="price" class="col-sm-4 col-form-label">Price</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="price"
+            [value]="borrowForm.value.price | currency: 'USD'" />
+        </div>
+      </div>
+      <div *ngIf="!nft.borrowed" class="form-group row mb-0">
+        <label for="borrowAmount" class="col-sm-4 col-form-label">Borrow Amount</label>
+        <div class="col-sm-8">
+          <input [type]="nft.borrowed || readOnly ? 'text' : 'number'" [ngClass]="
+              nft.borrowed || readOnly
+                ? 'form-control-plaintext'
+                : 'form-control'
+            " [readonly]="nft.borrowed || readOnly" id="borrowAmount" formControlName="borrowAmount" />
+          <ng-container *ngIf="
+              !nft.borrowed &&
+              borrowForm.controls.borrowAmount.errors &&
+              (borrowForm.controls.borrowAmount.touched ||
+                borrowForm.controls.borrowAmount.dirty)
+            ">
+            <p class="text-danger">
+              <ng-container *ngIf="borrowForm.controls.borrowAmount.errors.required">
+                Borrow Amount is required
+              </ng-container>
+              <ng-container *ngIf="borrowForm.controls.borrowAmount.errors.min">
+                Borrow Amount must not be less than
+                {{
+                borrowForm.controls.borrowAmount.errors.min.min
+                | currency: "USD"
+                }}
+              </ng-container>
+              <ng-container *ngIf="borrowForm.controls.borrowAmount.errors.max">
+                Borrow Amount must not be more than
+                {{
+                borrowForm.controls.borrowAmount.errors.max.max
+                | currency: "USD"
+                }}
+                (70% of the price amount)
+              </ng-container>
+            </p>
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-group row mb-0">
+        <label for="borrowStatus" class="col-sm-4 col-form-label">Borrow Status</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="borrowStatus"
+            [value]="nft.borrowed ? 'Pledged' : 'Available to Borrow'" />
+        </div>
+      </div>
+      <div class="form-group row mb-0">
+        <label for="amountBorrowed" class="col-sm-4 col-form-label">Amount Borrowed</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="amountBorrowed"
+            formControlName="amountBorrowed" />
+        </div>
+      </div>
+      <div *ngIf="nft.borrowed" class="form-group row mb-0">
+        <label for="amountBorrowed" class="col-sm-4 col-form-label">Repayment Amount</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="amountBorrowed"
+            formControlName="amountBorrowed" />
+        </div>
+      </div>
+      <div *ngIf="!nft.repayed && nft.borrowed" class="form-group row mb-0">
+        <label for="repayAmount" class="col-sm-4 col-form-label">Repay Amount</label>
+        <div class="col-sm-8">
+          <input [type]="nft.repayed || readOnly ? 'text' : 'number'" [ngClass]="
+              nft.repayed || readOnly
+                ? 'form-control-plaintext'
+                : 'form-control'
+            " [readonly]="nft.repayed || readOnly" id="repayAmount" formControlName="repayAmount" />
+          <ng-container *ngIf="
+              !nft.repayed &&
+              borrowForm.controls.repayAmount.errors &&
+              (borrowForm.controls.repayAmount.touched ||
+                borrowForm.controls.repayAmount.dirty)
+            ">
+            <p class="text-danger">
+              <ng-container *ngIf="borrowForm.controls.repayAmount.errors.required">
+                Repay Amount is required
+              </ng-container>
+              <ng-container *ngIf="borrowForm.controls.repayAmount.errors.min">
+                Repay Amount must not be less than
+                {{
+                borrowForm.controls.repayAmount.errors.min.min
+                | currency: "USD"
+                }}
+              </ng-container>
+              <ng-container *ngIf="borrowForm.controls.repayAmount.errors.max">
+                Repay Amount must not be more than
+                {{
+                borrowForm.controls.repayAmount.errors.max.max
+                | currency: "USD"
+                }}
+              </ng-container>
+            </p>
+          </ng-container>
+        </div>
+      </div>
+
+      <div *ngIf="nft.borrowed && nft.repayed" class="form-group row mb-0">
+        <label for="amountRepayed" class="col-sm-4 col-form-label">Amount Repayed</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control-plaintext" id="amountRepayed"
+            formControlName="amountRepayed" />
+        </div>
+      </div>
+
+      <div class="mt-3" *ngIf="!readOnly">
+        <div *ngIf="!nft.borrowed" class="d-flex justify-content-end">
+          <button [disabled]="borrowForm.invalid || nft.borrowed" type="submit" class="btn btn-primary mr-2">
+            Borrow
+          </button>
+        </div>
+        <div *ngIf="!nft.repayed && nft.borrowed" class="d-flex justify-content-end">
+          <button [disabled]="borrowForm.invalid || nft.repayed" type="submit" class="btn btn-warning mr-2">
+            Repay
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> -->

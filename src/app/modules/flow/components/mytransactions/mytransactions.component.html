@@ -1,0 +1,76 @@
+<div>
+    <p class="mainTitle">View <span class="highlight">Transactions</span></p>
+    <!-- <p class="subTitle">Here you can view all your <span class="highlight">transactions</span> from bonds you've bought to borrowing
+    </p> -->
+    <div class="row" style="margin: 2% 7%;
+    margin-bottom: 0;">
+        <div class="col-6">
+            <label *ngFor="let radiobutton of radioItems">
+                <p class="pRadioBtns"><input class="inputRadioBtns" type='radio' name='list'
+                        (click)="model.option = radiobutton" [checked]="radiobutton === model.option"
+                        (change)="radioChange(model.option)" />{{radiobutton}}</p>
+            </label>
+        </div>
+        <!-- <div class="col-6">
+            <p class="downloadXlsBtn" (click)="downloadInXls()"><img style="width: 10%;
+                margin-right: 2px;
+                margin-top: -4px;" src="../../../../../assets/images/xlsIcon.png">
+                Download in XLS
+            </p>
+        </div> -->
+    </div>
+    <div class="divMain">
+        <div class="tableSection">
+            <!-- <div class="searchDiv">
+                <i class="fa fa-search searchIcon"></i>
+                <input type="text" class="inputSearchBar inputBoxSearch" placeholder="Search any transaction"
+                    name="searchTransaction">
+                <p class="searchT">Search</p>
+            </div> -->
+            <div>
+                <table style="width: 100%;">
+                    <thead class="theadd">
+                        <tr>
+                            <!-- <th class="sNoTh">S. No.</th> -->
+                            <th>Tx Date</th>
+                            <th class="withDClass">Tx Description</th>
+                            <th>Amount</th>
+                            <th>Coin</th>
+                            <th>View on Polygon</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="showTableOfTransactions">
+                        <tr *ngFor="let data of dataToShow;let i = index">
+                            <!-- <td>{{i+1}}</td> -->
+                            <td>{{data.time | date : 'mediumDate'}}</td>
+                            <td class="withDClass descCLT" *ngIf="data.type == 'Lend'">
+                                Bru bond {{ data.amount }} USDT
+                            </td>
+                            <td class="withDClass descCLT" *ngIf="data.type == 'Borrow'">
+                                Borrowed {{ data.amount }} USDT
+                            </td>
+                            <td class="withDClass descCLT" *ngIf="data.type == 'Repay'">
+                                Repay {{data.amount }} USDT
+                            </td>
+                            <td class="withDClass descCLT" *ngIf="data.type == 'withdraw'">Withdrawn USDT
+                                {{data.amount}}
+                                from {{poolName}}
+                            </td>
+                            <td>
+                                <span *ngIf="data.type == 'Lend' || data.type == 'Borrow' || data.type == 'Repay'" class="creditTrans">+{{data.amount}}</span>
+                                <span *ngIf="data.type == 'withdraw'" class="debitTrans">-{{data.amount}}</span>
+                            </td>
+                            <td>USDT</td>
+                            <td (click)="viewOnPolygon(data)" class="lendMoreBtnTable">View Now</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="!showTableOfTransactions && dataToShow.length == 0">
+                        <p *ngIf="showEmptyMessage">Nothing to show.<i class="fa fa-frown-o"></i><br>
+                            Carry out some transactions and check back here.</p>
+                        <p *ngIf="!showEmptyMessage" class="loaderForTransactions"><i class="fa fa-spin fa-circle-o-notch"></i></p>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

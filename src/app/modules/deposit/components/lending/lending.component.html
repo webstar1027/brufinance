@@ -1,0 +1,240 @@
+<div class="lending">
+  <section class="lending__main">
+    <div class="floatingBubble floatingBubble1"></div>
+    <div class="floatingBubble floatingBubble2"></div>
+    <div class="lending__section-one">
+      <h2 class="lending__heading">It's <span class="lendingTime">Lending Time !!</span>
+        <!-- <img class="vector" src="../../../../../assets/images/Vector 1.png" alt="vector"> -->
+      </h2>
+
+      <p class="lending__cont">
+        Deposit <img style="margin: 0 13px;" class="eth" src="../../../../../assets/images/polygon.png" alt="ETH">
+        <span class="lending__cont_bold">MATIC</span> and enjoy<br>
+        <span class="lending__cont_bold">High Yield.</span> Lend against<br>
+        <span class="lending__cont_bold">Real World Assets</span>.
+      </p>
+      <div>
+        <button (click)="handleModalOpen(depositModal)" class="lending__btn1">
+          Deposit
+        </button>
+        <button (click)="handleModalOpen(withdrawModal)" class="lending__btn2">
+          Withdraw
+        </button>
+      </div>
+      <div>
+        <p class="PtextDeposit">Deposit your crypto & earn 10% interest on it <span style="color: #540F7A;
+          font-weight: 500;">( MATIC only )</span></p>
+        <p class="PtextDeposit2 darkColorTheme">Withdraw your deposited crypto anytime when you need it</p>
+      </div>
+      <!-- <div class="lending__interest">*Earn 7 interest on deposits</div> -->
+    </div>
+
+    <div class="lending__section-two">
+      <!-- <div class="card card_1"> -->
+      <div class="card card_2">
+        <div class="walletSideShadowBox">
+        </div>
+        <img class="spiralImage" src="../../../../../assets/images/sprial.png">
+        <div style="background-color: white;
+        border-radius: 22px;">
+          <p class="walletPClass"><img class="wallet_icon" src="../../../../../assets/images/wallet.png" alt=""><span
+              class="walletText">Your
+              Wallet</span>
+            <span class="statusCheck">•</span>
+          </p>
+          <p class="walletBalance">
+            Wallet Balance :
+            <span class="defText darkColorTheme">MATIC</span>
+            <span class="defText lightColorTheme">{{ onChainBal | number: "1.6-6"
+              }}</span>
+          </p>
+          <p class="walletNoteText">
+            Transfer <span class="darkColorThemeText">MATIC</span> from your MetaMask Wallet to
+            make a deposit on <span class="darkColorThemeText">BRU</span>
+          </p>
+
+          <div class="mt-4">
+            <p class="transactionsTab">Transactions</p>
+            <p class="walletBalance">Balance :
+              <span class="defText darkColorTheme">MATIC</span>
+              <span class="defText lightColorTheme">{{ balance | number: "1.4-4"}}</span>
+            </p>
+            <p class="walletBalance">Pool Asset Balance :
+              <span class="defText darkColorTheme">MATIC</span>
+              <span class="defText lightColorTheme">{{ dbal | number: "1.10-10"}}</span>
+            </p>
+            <p class="walletBalance">Total Interest Accrued :
+              <span class="defText darkColorTheme">BTKN</span>
+              <span class="defText lightColorTheme">{{ calEthInterestOnDeposit | number: "1.10-10"}}</span>
+            </p>
+            <p class="walletBalance">Withdrawable Balance :
+              <span class="defText darkColorTheme">MATIC</span>
+              <span class="defText lightColorTheme">{{ wbal | number: "1.10-10"}}</span>
+            </p>
+            <p class="walletBalance">bMatic Balance :
+              <span class="defText darkColorTheme">BTKN</span>
+              <span class="defText lightColorTheme">{{ BTKN | number: "1.10-10"}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+  </section>
+  <footer class="lending__footer"></footer>
+</div>
+
+<ng-template #depositModal let-modal>
+  <div class="modal-body p-4 deposit-modal" *ngIf="!depositSuccess">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Deposit MATIC</h3>
+    <p class="modalClasssText">
+      The deposited amount is lent against
+      <span class="lightColorTheme">Real World<br> Assets</span> such as
+      agricultural commodities stored in<br> warehouses in
+      <span class="lightColorTheme">India</span>
+    </p>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-7">
+          <p class="text-left modalPText">Enter <span class="lightColorTheme">MATIC</span> to be deposited</p>
+        </div>
+        <div class="col">
+          <p class="text-right">
+            <input class="input" placeholder="Enter MATIC" [(ngModel)]="depositValue" />
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <p class="text-left modalPText">Interest Applicable</p>
+        </div>
+        <div class="col">
+          <p class="text-right lightColorTheme">10% per annum</p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div [ngStyle]="{
+        'padding-right': '15px',
+        display: 'flex',
+        'justify-content': 'flex-end'
+      }">
+      <button *ngIf="!depositBtnClicked" class="button button--deposit" (click)="handleDeposit()">
+        Deposit Now
+      </button>
+      <button *ngIf="depositBtnClicked" class="button button--deposit">
+        <i class="fa fa-spin fa-circle-o-notch"></i>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body p-4 deposit-modal" *ngIf="depositSuccess">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Deposit Successful</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed.</p>
+    </div>
+    <div class="successModaldiv">
+      <p class="youDepositedMsg">You Deposited : <span class="lightColorTheme">{{depositValue}}</span><span
+          class="darkColorTheme"> MATIC</span>
+      </p>
+      <p class="successModaldivP youDepositedSubMsg">Accrued interest is shown on the <span class="lightColorTheme">My
+          Deposits</span>
+        page.</p>
+    </div>
+    <p>You can also view the transaction on <span class="lightColorTheme">Polygon Blockchain</span></p>
+
+    <br />
+
+    <div [ngStyle]="{
+        'padding-right': '15px',
+        display: 'flex',
+        'justify-content': 'flex-end'
+      }">
+      <button class="button button--deposit" (click)="viewTransaction()">
+        View on Polygon
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #withdrawModal let-modal>
+  <div class="modal-body p-4 deposit-modal" *ngIf="!withdrawSuccess">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Withdraw MATIC</h3>
+    <p class="modalClasssText">
+      Please find the withdrawable amount you have to withdraw and the option to <span class="lightColorTheme">withdraw
+        MATIC</span> to your <span class="lightColorTheme">MetaMask</span> or <span
+        class="lightColorTheme">WallectConnect</span> wallets.
+    </p>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-7">
+          <p class="text-left modalPText">Withdrawable MATIC</p>
+        </div>
+        <div class="col">
+          <p class="text-right"><span class="lightColorTheme">{{ wbal | number: "1.10-10" }}</span> <span
+              class="darkColorTheme"> MATIC</span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <p class="text-left modalPText">Enter MATIC to be withdraw</p>
+        </div>
+        <div class="col">
+          <p class="text-right">
+            <input class="input" placeholder="Enter MATIC" [(ngModel)]="withdrawValue" />
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div [ngStyle]="{
+        'padding-right': '15px',
+        display: 'flex',
+        'justify-content': 'flex-end'
+      }">
+      <button *ngIf="!withdrawBtnClicked" class="button button--deposit" (click)="handleWithdraw()">
+        Withdraw Now
+      </button>
+      <button *ngIf="withdrawBtnClicked" class="button button--deposit">
+        <i class="fa fa-spin fa-circle-o-notch"></i>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body p-4 deposit-modal" *ngIf="withdrawSuccess">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Withdraw Successful</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed.</p>
+    </div>
+    <div class="successModaldiv">
+      <p class="youDepositedMsg">You withdrawn : <span class="lightColorTheme">{{withdrawValue}}</span><span
+          class="darkColorTheme"> MATIC</span>
+      </p>
+      <p class="successModaldivP youDepositedSubMsg">You can also <span class="lightColorTheme">Lend</span> your
+        withdrawn money any time.</p>
+    </div>
+    <p>You can also view the transaction on <span class="lightColorTheme">Polygon Blockchain</span></p>
+
+    <br />
+
+    <div [ngStyle]="{
+        'padding-right': '15px',
+        display: 'flex',
+        'justify-content': 'flex-end'
+      }">
+      <button class="button button--deposit" (click)="viewTransaction()">
+        View on Polygon
+      </button>
+    </div>
+  </div>
+</ng-template>

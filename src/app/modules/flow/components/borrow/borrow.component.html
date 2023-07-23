@@ -1,0 +1,824 @@
+<div>
+  <p class="mainTitle">Let's <span class="highlight">Borrow</span></p>
+  <p class="subTitle">
+    Borrow against <span class="highlight">Commodity</span> deposits in
+    warehouses.
+  </p>
+  <!-- Tabs start -->
+  <!-- <p><button (click)="borrowOn('lend')" class="lendToggle">Buy Bonds</button></p>
+    <p><button (click)="borrowOn('borrow')" class="borrowToggleInactive">Borrow</button></p> -->
+  <div style="position: relative">
+    <button (click)="borrowOn('lend')" class="buyBonds_Btn">Buy Bonds</button>
+    <button (click)="borrowOn('borrow')" class="borrow_Btn">Borrow</button>
+  </div>
+  <div class="mainDivSection">
+    <div id="tabs" style="text-align: center">
+      <!-- <p class="alltabs" id="lp" (click)="commodityView()">Commodity View</p> -->
+      <p class="alltabs active" id="wd" (click)="withdraw()">Receipt View</p>
+      <p class="alltabs" id="mw" (click)="myWallet()">My Wallet</p>
+    </div>
+    <div id="content" class="sectionDiv">
+      <!-- <div id="content1" *ngIf="commodityViewSection">
+                <p class="section1p"><span class="highlight">Commodity</span> Deposit Details</p>
+                <table style="width: 100%;">
+                    <thead class="theadd">
+                        <tr>
+                            <th class="sNoTh">S. No.</th>
+                            <th>Pool Name</th>
+                            <th>APY (%)</th>
+                            <th>Lend Amount</th>
+                            <th>Interest Accrued</th>
+                            <th>Collateral Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of tData;let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.apy}} % p.a</td>
+                            <td>USDT {{data.la}}</td>
+                            <td>USDT {{data.ia}}</td>
+                            <td>{{data.ct}}</td>
+                            <td (click)="lendMore(data, lendmore)" class="lendMoreBtnTable">Lend More</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+      <div id="content2" *ngIf="receiptViewSection">
+        <!-- <p class="section1p">Here you can <span class="highlight">Borrow and Repay</span> your Loan with just
+                    one click.</p> -->
+        <p class="section1p">
+          <span class="highlight">Commodity</span> Deposit Details
+        </p>
+        <p
+          style="
+            color: grey;
+            text-align: center;
+            word-wrap: break-word;
+            font-size: 15px;
+          "
+        >
+          These are dummy RWA NFTs. Feel free to Deposit (Mint) and test Borrow
+          and Repayment against them. <br />
+          <span class="highlight"
+            >Please do not refresh the page while minting is undergoing.</span
+          >
+        </p>
+        <div class="p-4 mainDivSec">
+          <div *ngIf="fetchedData" class="row">
+            <div *ngFor="let nft of nfts; let i = index" class="col-md-3 p-3">
+              <app-nft-card
+                [nft]="nft"
+                [index]="i"
+                (borrow)="handleBorrow($event, borrowM)"
+                (repay)="handleRepay($event, repayM)"
+                (mint)="handleMint($event, i)"
+                [mintBtnClicked]="mintBtnClicked"
+              >
+              </app-nft-card>
+            </div>
+          </div>
+
+          <div class="text-center p-3" *ngIf="showSpinner">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+
+          <div *ngIf="fetchedData && nfts.length" class="text-center">
+            <button class="btn btn-lg" (click)="handleShowMore()">
+              Show more &rarr;
+            </button>
+          </div>
+
+          <div *ngIf="fetchedData && !nfts.length && !showSpinner">
+            <p class="text-center m-3">No NFTs found</p>
+          </div>
+        </div>
+      </div>
+      <div id="content3" *ngIf="walletSection">
+        <p class="section1p">
+          All type of <span class="highlight">balances</span> at one place.
+        </p>
+        <div class="row" style="margin: 0 15px">
+          <div class="col-6 leftSectionWallet">
+            <p>
+              Metamask Wallet
+              <span class="connectedText">Connected</span>
+              <span class="providerText">{{
+                getProviderValue(networkVersion)
+              }}</span>
+            </p>
+            <p class="walletAddress">Wallet Address</p>
+            <p class="addressField popup">
+              {{ walletAddress
+              }}<span class="copyIcon" (click)="copyAddress()"
+                ><i class="fa fa-copy"></i>
+                <span class="popuptext" id="myPopup">Address Copied</span>
+              </span>
+            </p>
+            <!-- <input class="checkBoxLowBalance" (change)="hideLowBalance($event)" value="angular"
+                            type="checkbox" /> -->
+            <!-- <p class="hideLowBal">Hide low balance wallets</p> -->
+            <p class="hideLowBal">Assets</p>
+            <div class="walletDiv">
+              <p *ngFor="let wallet of wallets" class="walletList">
+                {{ wallet.name }}
+                :
+                <span class="walletListSpan"
+                  ><span class="highlight">{{ wallet.value }}</span> ( $
+                  {{ wallet.value }} )</span
+                >
+              </p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row" style="margin: 0px 15px;">
+                <div class="col-12 rightSectionWalletTop" id="totalLendingSection">
+                    <p>Total borrowing with us. 
+                      <span style="float: right;" class="highlight"> {{ totalBorrowing }} USDT
+                        <i *ngIf="!showExpandCollIcon" class="fa fa-minus-square expandIcon"
+                            (click)="collapseTL()"></i>
+                        <i *ngIf="showExpandCollIcon" class="fa fa-plus-square expandIcon"
+                            (click)="expandTL()"></i>
+                      </span>
+                    </p>
+                    <div class="walletDiv" id="ltlist" style="height: 250px;">
+                        <div *ngIf="borrowTransactions && borrowTransactions.length">
+                          <p *ngFor="let trans of borrowTransactions" class="walletList"> {{trans.type}} :
+                            <span class="walletListSpan" style="color: #4fff5e;" *ngIf="trans.type == 'Borrow'">
+                              +{{trans.amount}}
+                            </span>
+                            <span class="walletListSpan" style="color: #FF4F4F;"  *ngIf="trans.type == 'Repay'">-{{trans.amount}} </span>
+                          </p>
+                        </div>
+                        <div *ngIf="!borrowTransactions || !borrowTransactions.length">
+                          <p class="notransmsg"><i class="fa fa-frown-o sadFaceIcon"></i> Sorry, no
+                              transactions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <ng-template #lendmore let-modal>
+    <div class="modal-body deposit-modal" *ngIf="!lendingSuccess">
+        <h3 class="lendMoreModalHeading">Lend More</h3>
+        <div class="row lendModalDivSection">
+            <div class="col-6 lendModalDivSectionCol">
+                <ul>
+                    <li style="margin-bottom: 8px;">Pool Name : <span
+                            class="highlight">{{selectedTransaction.name}}</span></li>
+                    <li>APY ( % ) : <span class="highlight">{{selectedTransaction.apy}} % p.a</span></li>
+                </ul>
+            </div>
+            <div class="col-6 lendModalDivSectionCol">
+                <ul class="ul2">
+                    <li style="margin-bottom: 8px;">Collateral Type : <span
+                            class="highlight">{{selectedTransaction.ct}}</span></li>
+                    <li>Lockin Period : <span class="highlight">{{selectedTransaction.lockin || '-'}} Years</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row" style="margin: 0px;margin-top: 16px;">
+            <div class="col-6">
+                <p class="pSubHead">Select Crypto Asset</p>
+                <select [(ngModel)]="selectedCoin" class="inputBoxes">
+                    <option selected value="" disabled>Select Crypto Asset</option>
+                    <option *ngFor="let coin of coinList" value="coin">{{coin}}</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <p class="pSubHead">Enter Amount</p>
+                <input class="input inputBoxes inputAmount" (ngModelChange)="calculateFees($event)"
+                    placeholder="Enter Amount" [(ngModel)]="lendAmount" />
+            </div>
+        </div>
+        <div style="margin: 15px;margin-top: 20px;">
+            <p class="pStyDes">Conversion Rate ( USDT 1 = USD 1 ) <span class="highlight">$ {{lendAmount}}</span></p>
+            <p class="pStyDes borderBottom">Total transaction fees : <span class="highlight">$ {{fees}}</span></p>
+            <p class="pStyDes borderBottom">Total transaction amount : <span class="highlight">$
+                    {{totalTransactionAmount}}</span></p>
+        </div>
+        <div class="row" style="margin: 0px;">
+            <div class="col-6">
+                <p class="buttonsmodal cancelBtn" (click)="modal.dismiss()">Cancel</p>
+            </div>
+            <div class="col-6">
+                <p class="buttonsmodal lendNowBtn" *ngIf="!lendNowBtnClicked" (click)="handleLendNow()">Lend
+                    Now</p>
+                <p class="buttonsmodal lendNowBtn" *ngIf="lendNowBtnClicked"><i
+                        class="fa fa-spin fa-circle-o-notch"></i></p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body deposit-modal" *ngIf="lendingSuccess">
+        <h3 class="lendMoreModalHeading">Lending Successful</h3>
+        <div class="successModaldivPSuccess">
+            <i class="fa fa-check-circle depositSUccessPIcon"></i>
+            <p class="depositSuccessModalPL">Transaction completed.</p>
+            <div class="successModalMDiv">
+                <p class="successModalPT" style="margin-bottom: 8px;">Successfully Lend <span
+                        class="highlight">{{selectedCoin}}
+                        {{lendAmount}}</span> in
+                    <span class="highlight">{{selectedTransaction.name}}</span>
+                </p>
+                <p class="successModalPT">Total Lending : <span class="highlight">$ {{totalLending}}</span></p>
+            </div>
+            <p class="sssssssssSS">View the transaction on <span class="highlight cPP">My Transaction</span> page.</p>
+        </div>
+        <p style="text-align: center;margin-bottom: 0;">View the transaction on <span class="highlight">Polygon
+                Blockchain</span>
+        </p>
+        <br />
+        <div class="row" style="margin: 0px;">
+            <div class="col-6">
+                <p class="buttonsmodal cancelBtn" (click)="modal.dismiss()">Cancel</p>
+            </div>
+            <div class="col-6">
+                <p class="buttonsmodal lendNowBtn" (click)="viewTransaction()">View
+                    Transaction</p>
+            </div>
+        </div>
+    </div>
+</ng-template> -->
+
+<!-- <ng-template #withdraw_m let-modal>
+    <div class="modal-body deposit-modal" *ngIf="!withdrawSuccess">
+        <h3 class="lendMoreModalHeading">Withdraw Liquidity</h3>
+        <div class="row lendModalDivSection">
+            <div class="col-6 lendModalDivSectionCol">
+                <ul>
+                    <li style="margin-bottom: 8px;">Pool Name : <span
+                            class="highlight">{{selectedTransaction.name}}</span></li>
+                    <li>APY ( % ) : <span class="highlight">{{selectedTransaction.apy}} % p.a</span></li>
+                </ul>
+            </div>
+            <div class="col-6 lendModalDivSectionCol">
+                <ul class="ul2">
+                    <li style="margin-bottom: 8px;">Collateral Type : <span
+                            class="highlight">{{selectedTransaction.ct}}</span></li>
+                    <li>Lockin Period : <span class="highlight">{{selectedTransaction.lockin || '-'}} Years</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row" style="margin: 0px;margin-top: 16px;">
+            <div class="col-6">
+                <p class="pSubHead">Select Crypto Asset</p>
+                <select [(ngModel)]="selectedCoin" class="inputBoxes">
+                    <option selected value="" disabled>Select Crypto Asset</option>
+                    <option *ngFor="let coin of coinList" value="coin">{{coin}}</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <p class="pSubHead">Enter Amount</p>
+                <input class="input inputBoxes inputAmount" (ngModelChange)="calculateFeesForWithdraw($event)"
+                    placeholder="Enter Amount" [(ngModel)]="withdrawAmount" />
+            </div>
+        </div>
+        <div style="margin: 15px;margin-top: 20px;">
+            <p class="pStyDes">Conversion Rate ( USDT 1 = USD 1 ) <span class="highlight">$ {{withdrawAmount}}</span>
+            </p>
+            <p class="pStyDes borderBottom">Total transaction fees : <span class="highlight">$ {{fees}}</span></p>
+            <p class="pStyDes borderBottom">Total transaction amount : <span class="highlight">$
+                    {{totalTransactionAmountWithDraw}}</span></p>
+        </div>
+        <div class="row" style="margin: 0px;">
+            <div class="col-6">
+                <p class="buttonsmodal cancelBtn" (click)="modal.dismiss()">Cancel</p>
+            </div>
+            <div class="col-6">
+                <p class="buttonsmodal lendNowBtn" *ngIf="!withdrawNowBtnClicked"
+                    (click)="handleWithDrawNow()">Withdraw
+                    Now</p>
+                <p class="buttonsmodal lendNowBtn" *ngIf="withdrawNowBtnClicked"><i
+                        class="fa fa-spin fa-circle-o-notch"></i></p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body deposit-modal" *ngIf="withdrawSuccess">
+        <h3 class="lendMoreModalHeading">Withdrawn Successful</h3>
+        <div class="successModaldivPSuccess">
+            <i class="fa fa-check-circle depositSUccessPIcon"></i>
+            <p class="depositSuccessModalPL">Transaction completed.</p>
+            <div class="successModalMDiv">
+                <p class="successModalPT" style="margin-bottom: 8px;">Successfully withdrawn <span
+                        class="highlight">{{selectedCoin}}
+                        {{withdrawAmount}}</span> from
+                    <span class="highlight">{{selectedTransaction.name}}</span>
+                </p>
+            </div>
+        </div>
+        <br />
+        <div class="row" style="margin: 0px;">
+            <div class="col-6">
+                <p class="buttonsmodal cancelBtn" (click)="modal.dismiss()">Cancel</p>
+            </div>
+            <div class="col-6">
+                <p class="buttonsmodal lendNowBtn" (click)="viewTransaction()">View
+                    Transaction</p>
+            </div>
+        </div>
+    </div>
+</ng-template> -->
+<!-- <ng-template #successModal let-modal>
+    <div class="modal-body p-4 deposit-modal" *ngIf="borrowSuccess">
+        <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+        <h3 class="modalH3">Borrowing Successful</h3>
+        <div class="successModaldivPSuccess">
+            <i class="fa fa-check-circle depositSUccessPIcon"></i>
+            <p class="depositSuccessModalPL">Transaction completed.</p>
+        </div>
+        <div class="successModaldiv">
+            <p class="youDepositedMsg" style="text-align: center;">Borrowed: <span
+                    class="lightColorTheme">{{borrowAmount}}</span><span class="darkColorTheme"> MATIC</span>
+            </p>
+            <p class="successModaldivP youDepositedSubMsg">Your borrowing is shown on the <a style="color: #7C037B;"
+                    href="/nfts/my"><span class="lightColorTheme">My
+                        NFTs</span></a></p>
+        </div>
+        <p style="margin-bottom: 0;
+      text-align: center;">You can also view the transaction on <span class="lightColorTheme">Polygon Blockchain</span>
+        </p>
+        <br />
+        <div style="text-align: center;">
+            <button class="button button--deposit" (click)="viewTransaction()">
+                View on Polygon
+            </button>
+        </div>
+    </div>
+    <div class="modal-body p-4 deposit-modal" *ngIf="repaySuccess">
+        <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+        <h3 class="modalH3">Repayment Successful</h3>
+        <div class="successModaldivPSuccess">
+            <i class="fa fa-check-circle depositSUccessPIcon"></i>
+            <p class="depositSuccessModalPL">Transaction completed.</p>
+        </div>
+        <div class="successModaldiv">
+            <p class="youDepositedMsg" style="text-align: center;">Repaid: <span
+                    class="lightColorTheme">{{repayAmount}}</span><span class="darkColorTheme"> MATIC</span>
+            </p>
+            <p class="successModaldivP youDepositedSubMsg">Your repayment is shown on the <a style="color: #7C037B;"
+                    href="/nfts/my"><span class="lightColorTheme">My
+                        NFTs</span></a></p>
+        </div>
+        <p style="margin-bottom: 0;
+      text-align: center;">You can also view the transaction on <span class="lightColorTheme">Polygon Blockchain</span>
+        </p>
+        <br />
+        <div style="text-align: center;">
+            <button class="button button--deposit" (click)="viewTransaction()">
+                View on Polygon
+            </button>
+        </div>
+    </div>
+</ng-template> -->
+
+<ng-template #borrowM let-modal>
+  <div class="modal-body deposit-modal" *ngIf="borrowStep1">
+    <h3 class="lendMoreModalHeading">{{ selectedNft.commodity }}</h3>
+    <img
+      src="../../../../../assets/images/commodity.png"
+      class="modalImage_Universal"
+    />
+    <ul class="uList">
+      <li>
+        Commodity Name :
+        <span class="highlight">{{ selectedNft.commodity }}</span>
+      </li>
+      <li>
+        Warehouse Location :
+        <span class="highlight"
+          >{{
+            selectedNft.depositApplicationID?.waddress?.wdistrict
+          }}
+          India</span
+        >
+      </li>
+      <li>Type : <span class="highlight">Agricultural Commodity</span></li>
+      <!-- <li>Verified : <span class="highlight">{{verifiedHash}}</span></li> -->
+
+      <li>
+        Total Quantity :
+        <span class="highlight"
+          >{{ selectedNft.quantity | numberWithComma }} KG</span
+        >
+      </li>
+      <li>
+        Collateral Value :
+        <span class="highlight"
+          >INR {{ selectedNft.nftPrice | numberWithComma }} ( ${{
+            convertInrToUsd(selectedNft.nftPrice) | numberWithComma
+          }}
+          )</span
+        >
+      </li>
+    </ul>
+
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p class="buttonsmodal cancelBtn" (click)="cancelBorrow()">Cancel</p>
+      </div>
+      <div class="col-6">
+        <p class="buttonsmodal lendNowBtn" (click)="GoToBorrowStep2()">Next</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body deposit-modal" *ngIf="borrowStep2">
+    <h3 class="lendMoreModalHeading">Borrow</h3>
+    <div class="row lendModalDivSection">
+      <div class="col-6 lendModalDivSectionCol">
+        <ul>
+          <li style="margin-bottom: 8px">
+            Collateral Value :
+            <span class="highlight"
+              >INR {{ selectedNft.nftPrice | numberWithComma }} ( ${{
+                convertInrToUsd(selectedNft.nftPrice) | numberWithComma
+              }}
+              )</span
+            >
+          </li>
+          <li style="margin-bottom: 8px">
+            Interest Rate : <span class="highlight">{{ borrowRate }}% p.a</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 lendModalDivSectionCol">
+        <ul class="ul2">
+          <li style="margin-bottom: 8px; margin-right: 8px">
+            Eligible Loan Amount :
+            <span class="highlight"
+              >INR
+              {{ eligibleLoanAmount(selectedNft.nftPrice) | numberWithComma }} (
+              ${{
+                convertInrToUsd(eligibleLoanAmount(selectedNft.nftPrice))
+                  | numberWithComma
+              }}
+              )</span
+            >
+          </li>
+          <li style="white-space: nowrap">
+            LTV : <span class="highlight">70 %</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px; margin-top: 16px">
+      <div class="col-6">
+        <p class="pSubHead">Select Crypto Asset</p>
+        <p class="inputP">
+          <img src="../../../../../assets/tether.png" class="imgSS" />
+          <span style="padding-left: 31%; color: #515151">Tether (USDT)</span>
+        </p>
+        <!-- <select [(ngModel)]="selectedCoin" class="inputBoxes">
+                    <option selected value="Tether (USDT)">Tether (USDT)</option>
+                    <option *ngFor="let coin of coinList" value="coin">{{coin}}</option>
+                </select> -->
+      </div>
+      <div class="col-6">
+        <p class="pSubHead">Enter Amount</p>
+        <input
+          class="input inputBoxes inputAmount"
+          (ngModelChange)="calculateFees($event)"
+          placeholder="Enter Amount"
+          [(ngModel)]="borrowAmount"
+        />
+      </div>
+    </div>
+    <div style="margin: 15px; margin-top: 20px">
+      <p class="pStyDes">
+        Conversion Rate ( USDT 1 = USD 1 )
+        <span class="highlight">USDT {{ borrowAmountInUsd }}</span>
+      </p>
+      <!-- <p class="pStyDes borderBottom">Total transaction fees : <span class="highlight">USDT {{fees}}</span></p> -->
+      <p class="pStyDes borderBottom">
+        Total transaction amount :
+        <span class="highlight">USDT {{ totalTransactionAmount }}</span>
+      </p>
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p class="buttonsmodal cancelBtn" (click)="cancelBorrow()">Cancel</p>
+      </div>
+      <div class="col-6">
+        <p
+          class="buttonsmodal lendNowBtn"
+          *ngIf="!showLoaderForBorrow"
+          (click)="handleSubmitBorrow(errorModal)"
+        >
+          Borrow Now
+        </p>
+        <p class="buttonsmodal lendNowBtn" *ngIf="showLoaderForBorrow">
+          <i class="fa fa-spin fa-circle-o-notch"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body deposit-modal" *ngIf="borrowSuccess">
+    <h3 class="lendMoreModalHeading">Borrowing Successful</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed.</p>
+      <div class="successModalMDiv">
+        <p class="successModalPT" style="margin-bottom: 8px">
+          Successfully Borrowed
+          <span class="highlight">{{ selectedCoin }} {{ borrowAmount }}</span>
+          in your
+          <span class="highlight">wallet.</span>
+        </p>
+        <p class="successModalPT">
+          Total Borrowing :
+          <span class="highlight"
+            >USDT {{ totalBorrowing | numberWithComma }}</span
+          >
+        </p>
+      </div>
+      <!-- <p class="sssssssssSS">View the transaction on <span class="highlight cPP">My Transaction</span> page.</p> -->
+    </div>
+    <!-- <p style="text-align: center;margin-bottom: 0;">View the transaction on <span class="highlight">Polygon
+                Blockchain</span>
+        </p> -->
+    <br />
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p
+          class="buttonsmodal cancelBtn"
+          (click)="resetValuesAfterSuccessBorrowAndRepay()"
+        >
+          Close
+        </p>
+      </div>
+      <div class="col-6">
+        <p class="buttonsmodal lendNowBtn" (click)="viewTransaction()">
+          View on Polygon
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-body p-4 deposit-modal">
+        <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+        <h3 class="modalH3">{{selectedNft.commodity}}</h3>
+        <div class="row mainRow">
+            <div class="width40" style="width: 42%;">
+                <img src="../../../../../assets/nft/{{img}}.jpg" style="width: 88%;height: 178px;
+          border-radius: 8px;">
+                <p class="highlightTextModal">You are lending <span class="lightColorTheme">MATIC</span> against <span
+                        class="lightColorTheme">{{selectedNft.commodity}}</span> stored in our warehouses</p>
+            </div>
+            <div class="width60" style="width: 58%;">
+                <p class="pModalTxt">Commodity Value : <span class="lightColorTheme spanMainCard">
+                        {{convertDollarToMatic(eligibleLoanAmount(borrowForm.value.price))}} MATIC ( $
+                        {{borrowForm.value.price}}
+                        )</span></p>
+                <p class="pEligibleAmount">Eligible Loan Amount : <span class="lightColorTheme spanMainCard">$
+                        {{eligibleLoanAmount(borrowForm.value.price)}}</span></p>
+                <p class="pModalTxt" style="margin-bottom: 24px;
+          margin-top: 20px;">Enter Loan Amount ( in MATIC ) :
+                    <input type="number" class="inputLoanAmount" [(ngModel)]="borrowAmount" style="margin-top: -6px;"
+                        (ngModelChange)="calculateInterestandPlatformFees($event)">
+                </p>
+                <p class="pModalTxt">Interest Applicable ( @13% p.a. ) : <span class="lightColorTheme spanMainCard">
+                        {{interestApplicable}} MATIC</span></p>
+                <p class="pModalTxt">Platform Fees ( @0.25% ) : <span class="lightColorTheme spanMainCard">
+                        {{platformFees}} MATIC</span></p>
+                <p *ngIf="!showLoaderForBorrow" class="mainBtn" (click)="handleSubmitBorrow('borrow', successModal)">
+                    Borrow Now
+                </p>
+                <p *ngIf="showLoaderForBorrow" class="mainBtn"><i class="fa fa-spin fa-circle-o-notch"></i></p>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div> -->
+</ng-template>
+<ng-template #repayM let-modal>
+  <div class="modal-body deposit-modal" *ngIf="!repaySuccess">
+    <h3 class="lendMoreModalHeading">Loan Repayment</h3>
+    <div class="row lendModalDivSection">
+      <div class="col-6 lendModalDivSectionCol">
+        <ul>
+          <li style="margin-bottom: 8px">
+            Loan Amount : USDT
+            <span class="highlight">{{ totalBorrowing }}</span>
+          </li>
+          <!-- <li style="white-space: nowrap;">Remaining Amount : <span class="highlight">INR
+                            {{eligibleLoanAmount(selectedNft.nftPrice) | numberWithComma}}</span>
+                    </li> -->
+        </ul>
+      </div>
+      <div class="col-6 lendModalDivSectionCol">
+        <ul class="ul2">
+          <li style="margin-bottom: 8px">
+            Interest Accrued : USDT
+            <span class="highlight"> {{ borrowInterestAccrued }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px; margin-top: 16px">
+      <div class="col-6">
+        <p class="pSubHead">Select Crypto Asset</p>
+        <p class="inputP">
+          <img src="../../../../../assets/tether.png" class="imgSS" />
+          <span style="padding-left: 31%; color: #515151">Tether (USDT)</span>
+        </p>
+        <!-- <select [(ngModel)]="selectedCoin" class="inputBoxes">
+                    <option selected value="Tether (USDT)">Tether (USDT)</option>
+                    <option *ngFor="let coin of coinList" value="coin">{{coin}}</option>
+                </select> -->
+      </div>
+      <div class="col-6">
+        <p class="pSubHead">Enter Amount</p>
+        <input
+          class="input inputBoxes inputAmount"
+          (ngModelChange)="calculateFeesForRepay($event)"
+          placeholder="Enter Amount"
+          [(ngModel)]="repayAmount"
+        />
+      </div>
+    </div>
+    <div style="margin: 15px; margin-top: 20px">
+      <p class="pStyDes">
+        Conversion Rate ( USDT 1 = USD 1 )
+        <span class="highlight">USDT {{ repayAmountInUsd }}</span>
+      </p>
+      <p class="pStyDes ">
+        Platform fees : <span class="highlight">USDT {{ fees }}</span>
+      </p>
+      <p class="pStyDes borderBottom">Total USDT deducted : <span class="highlight">USDT {{totalAmount}}</span></p>
+
+      <p class="pStyDes borderBottom">
+        Total transaction amount :
+        <span class="highlight">USDT {{ totalTransactionAmountRepay }}</span>
+      </p>
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p class="buttonsmodal cancelBtn" (click)="cancelRepay()">Cancel</p>
+      </div>
+      <div class="col-6">
+        <p
+          class="buttonsmodal lendNowBtn"
+          *ngIf="!showLoaderForRepay"
+          (click)="handleSubmitRepay(errorModal)"
+        >
+          Repay Now
+        </p>
+        <p class="buttonsmodal lendNowBtn" *ngIf="showLoaderForRepay">
+          <i class="fa fa-spin fa-circle-o-notch"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body deposit-modal" *ngIf="repaySuccess">
+    <h3 class="lendMoreModalHeading">Repayment Successful</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed.</p>
+      <div class="successModalMDiv">
+        <p class="successModalPT" style="margin-bottom: 8px">
+          Successfully Repaid
+          <span class="highlight">{{ selectedCoin }} {{ repayAmount }}</span>
+        </p>
+        <p class="successModalPT">
+          Remaining Balance :
+          <span class="highlight"
+            >{{ selectedCoin }} {{ remainingBalance }}</span
+          >
+        </p>
+      </div>
+      <!-- <p class="sssssssssSS">View the transaction on <span class="highlight cPP">My Transaction</span> page.</p> -->
+    </div>
+    <!-- <p style="text-align: center;margin-bottom: 0;">View the transaction on <span class="highlight">Polygon
+                Blockchain</span>
+        </p> -->
+    <br />
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p
+          class="buttonsmodal cancelBtn"
+          (click)="resetValuesAfterSuccessBorrowAndRepay()"
+        >
+          Close
+        </p>
+      </div>
+      <div class="col-6">
+        <p class="buttonsmodal lendNowBtn" (click)="viewTransaction()">
+          View on Polygon
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-body p-4 deposit-modal">
+        <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+        <h3 class="modalH3">{{selectedNft.commodity}}</h3>
+        <div class="row mainRow">
+            <div class="width40" style="width: 42%;">
+                <img src="../../../../../assets/nft/{{img}}.jpg" style="width: 88%;height: 178px;
+          border-radius: 8px;">
+                <p class="highlightTextModal">You are lending <span class="lightColorTheme">MATIC</span> against <span
+                        class="lightColorTheme">{{selectedNft.commodity}}</span> stored in our warehouses</p>
+            </div>
+            <div class="width60" style="width: 58%;">
+                <p class="pModalTxt">Commodity Value : <span class="lightColorTheme spanMainCard">
+                        {{convertDollarToMatic(eligibleLoanAmount(borrowForm.value.price))}} MATIC ( $
+                        {{borrowForm.value.price}}
+                        )</span></p>
+                <p class="pEligibleAmount">Eligible Loan Amount : <span class="lightColorTheme spanMainCard">$
+                        {{eligibleLoanAmount(borrowForm.value.price)}}</span></p>
+                <p class="pModalTxt" style="margin-bottom: 24px;
+          margin-top: 20px;">Enter Loan Amount ( in MATIC ) :
+                    <input type="number" class="inputLoanAmount" [(ngModel)]="borrowAmount" style="margin-top: -6px;"
+                        (ngModelChange)="calculateInterestandPlatformFees($event)">
+                </p>
+                <p class="pModalTxt">Interest Applicable ( @13% p.a. ) : <span class="lightColorTheme spanMainCard">
+                        {{interestApplicable}} MATIC</span></p>
+                <p class="pModalTxt">Platform Fees ( @0.25% ) : <span class="lightColorTheme spanMainCard">
+                        {{platformFees}} MATIC</span></p>
+                <p *ngIf="!showLoaderForBorrow" class="mainBtn" (click)="handleSubmitBorrow('borrow', successModal)">
+                    Borrow Now
+                </p>
+                <p *ngIf="showLoaderForBorrow" class="mainBtn"><i class="fa fa-spin fa-circle-o-notch"></i></p>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div> -->
+</ng-template>
+<!-- 
+<ng-template #repayM let-modal>
+    <div class="modal-body p-4 deposit-modal">
+        <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+        <h3 class="modalH3">Repay</h3>
+        <div class="row mainRow">
+            <div class="width40" style="width: 42%;">
+                <img src="../../../../../assets/nft/{{img}}.jpg" style="width: 88%;height: 178px;
+          border-radius: 8px;">
+                <p class="highlightTextModal">You are repaying the amount you borrowed against <span
+                        class="lightColorTheme">{{selectedNft.commodity}}</span> earlier.</p>
+            </div>
+            <div class="width60" style="width: 58%;">
+                <p class="pModalTxt" style="border-bottom: dashed #e4e4e4;
+          padding-bottom: 20px;margin-bottom: 22px;">Commodity Value : <span class="lightColorTheme spanMainCard">
+                        {{convertDollarToMatic(eligibleLoanAmount(borrowForm.value.price))}} MATIC ( $
+                        {{borrowForm.value.price}}
+                        )</span></p>
+                <p class="pModalTxt" style="margin-bottom: 24px;
+          margin-top: 13px;">Repayment Amount ( in MATIC ) :
+                    <input type="number" class="inputLoanAmount" [(ngModel)]="repayAmount" style="margin-top: -6px;"
+                        (ngModelChange)="calculateInterestandTotalAmount($event)">
+                </p>
+                <p class="pModalTxt">Interest Applicable ( @13% p.a. ) : <span class="lightColorTheme spanMainCard">
+                        {{interestApplicableRepay}} MATIC</span></p>
+                <p class="pModalTxt">Total Repayment Amount : <span class="lightColorTheme spanMainCard">
+                        {{totalRepaymentAmount}} MATIC</span></p>
+                <p *ngIf="!showLoaderForRepay" style="margin-top: 12%;" class="mainBtn repayBtn"
+                    (click)="handleSubmitRepay('repay', successModal)">
+                    Repay Now
+                </p>
+                <p *ngIf="showLoaderForRepay" style="margin-top: 12%;" class="mainBtn repayBtn"><i
+                        class="fa fa-spin fa-circle-o-notch"></i></p>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+</ng-template> -->
+
+<ng-template #errorModal let-modal>
+  <div class="modal-body deposit-modal">
+    <h3 class="lendMoreModalHeading">Transaction Failed</h3>
+    <div class="successModaldivPSuccess" style="background-color: #ff4f4f36">
+      <i
+        class="fa fa-times-circle depositSUccessPIcon"
+        style="color: #f26f6f"
+      ></i>
+      <p
+        class="depositSuccessModalPL"
+        style="padding: 19px 21%; padding-right: 10px"
+      >
+        Transaction couldn't be completed.
+      </p>
+      <div class="successModalMDiv">
+        <p
+          class="successModalPT"
+          style="background-color: white; padding: 11px; font-size: 16px"
+        >
+          Error encountered
+        </p>
+        <p class="successModalPT" style="font-size: 16px">{{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-12">
+        <p class="buttonsmodal lendNowBtn" (click)="modal.dismiss()">Okay</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

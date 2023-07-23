@@ -1,0 +1,836 @@
+<div>
+  <p class="mainTitle"><span class="highlight">Buy</span> Brú Bonds</p>
+  <p class="subTitle">
+    Utilize <span class="highlight">stablecoins</span> to buy
+    <span class="highlight">Emerging Market Asset Backed</span> bonds.
+  </p>
+
+  <div style="position: relative">
+    <button (click)="borrowOn('lend')" class="buyBonds_Btn">Buy Bonds</button>
+    <button (click)="borrowOn('borrow')" class="borrow_Btn">Borrow</button>
+  </div>
+
+  <div class="row divMainBar">
+    <div class="col-4">
+      <p class="BottomNote barPSty">
+        Total Number of Depositors :
+        <span class="highlight" style="font-weight: 400; float: right">{{
+          totalAssets
+          }}</span>
+      </p>
+    </div>
+    <div class="col-4">
+      <p class="BottomNote barPSty">
+        Total Value of Assets :
+        <span class="highlight" style="font-weight: 400; float: right">$ {{ numberWithCommas(totalAssetsValueMinted)
+          }}</span>
+      </p>
+    </div>
+    <div class="col-4">
+      <p class="checkOnPolyBtn" style="text-align: center">
+        <img style="height: 25px; position: absolute; margin-top: -1px"
+          src="../../../../../assets/images/polygonImg.png" />
+        <a style="color: #540f7a; margin-left: 33px"
+          href="https://mumbai.polygonscan.com/token/0xBD23D4020c02886b459379386D07b03fB18bEa92" target="_blank">Check
+          assets on Polygon Network</a>
+      </p>
+    </div>
+  </div>
+  <!-- Tabs start -->
+  <div class="mainDivSection">
+    <div id="tabs" style="text-align: center">
+      <p class="alltabs active" id="lp" (click)="lendingPools()">Pools</p>
+      <p class="alltabs" id="wd" (click)="withdraw()">Withdraw</p>
+      <p class="alltabs" id="mw" (click)="myWallet()">My Wallet</p>
+    </div>
+    <div id="content" class="sectionDiv">
+      <div id="content1" *ngIf="lendingPoolSection">
+        <!-- <p class="section1p">Your <span class="highlight">lending pools</span> and amount deposited in it.</p> -->
+        <p class="section1p">
+          Pools offered by <span class="highlight">Brú</span>
+        </p>
+        <table style="width: 100%">
+          <thead class="theadd">
+            <tr>
+              <!-- <th class="sNoTh">S. No.</th> -->
+              <th>Pool Name</th>
+              <th>APY (%)</th>
+              <th>Total Bond Principal</th>
+              <th>Interest Accrued</th>
+              <th>Collateral Type</th>
+              <th>Action</th>
+              <th>Bonds</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="tData && tData.length">
+            <tr *ngFor="let data of tData; let i = index">
+              <!-- <td>{{i+1}}</td> -->
+              <td (click)="poolDetailsModal(poolModal, data)" class="lendMoreBtnTable">
+                <i class="fa fa-circle poolActivity"></i>
+                {{ data.name }}
+              </td>
+              <td>{{ data.apy }} % p.a</td>
+              <td>USDT {{ data.la }}</td>
+              <td>USDT {{ data.ia }}</td>
+              <td>{{ data.ct }}</td>
+              <td (click)="lendMore(i, data, lendmore)" class="buttonOnLendTable lendMoreBtnTable">
+                Buy
+              </td>
+              <td (click)="showbonds(bonds)" class="buttonOnLendTable lendMoreBtnTable">
+                Show Bonds
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="!tData || !tData.length">
+            <tr>
+              <i class="fa fa-spin fa-circle-o-notch"></i>
+            </tr>
+          </tbody>
+        </table>
+        <p *ngIf="tData && tData.length" class="morePoolsMsg">
+          More pools coming soon ☺
+        </p>
+        <hr *ngIf="tData && tData.length" />
+      </div>
+      <div id="content2" *ngIf="withdrawSection">
+        <!-- <p class="section1p">You can <span class="highlight">withdraw</span> your amount from unlocked pools</p> -->
+        <table style="width: 100%">
+          <thead class="theadd">
+            <tr>
+              <!-- <th class="sNoTh">S. No.</th> -->
+              <th>Pool Name</th>
+              <th>APY (%)</th>
+              <th>Balance in Pool</th>
+              <th>Withdrawable Balance</th>
+              <th>Collateral Type</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="withdrawData && withdrawData.length">
+            <tr *ngFor="let data of withdrawData; let i = index">
+              <!-- <td>{{i+1}}</td> -->
+              <!-- <td>{{data.name}}</td> -->
+              <td (click)="poolDetailsModal(poolModal, data)" class="lendMoreBtnTable">
+                <i class="fa fa-circle poolActivity"></i>
+                {{ data.name }}
+              </td>
+              <td>{{ data.apy }} % p.a</td>
+              <td>USDT {{ data.la }}</td>
+              <td>USDT {{ data.ia }}</td>
+              <td>{{ data.ct }}</td>
+              <td (click)="withdrawM(i, data, withdraw_m)" class="buttonOnLendTable lendMoreBtnTable">
+                Withdraw
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="!withdrawData || !withdrawData.length">
+            <tr>
+              <i class="fa fa-spin fa-circle-o-notch"></i>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="content3" *ngIf="walletSection">
+        <p class="section1p">
+          All type of <span class="highlight">balances</span> at one place.
+        </p>
+        <div class="row" style="margin: 0 15px">
+          <div class="col-6 leftSectionWallet">
+            <p>
+              Metamask Wallet
+              <span class="connectedText">Connected</span>
+              <span class="providerText">{{
+                getProviderValue(networkVersion)
+                }}</span>
+            </p>
+            <p class="walletAddress">Wallet Address</p>
+            <p class="addressField popup">
+              {{ walletAddress
+              }}<span class="copyIcon" (click)="copyAddress()"><i class="fa fa-copy"></i>
+                <span class="popuptext" id="myPopup">Address Copied</span>
+              </span>
+            </p>
+            <!-- <input class="checkBoxLowBalance" (change)="hideLowBalance($event)" value="angular"
+                            type="checkbox" />
+                        <p class="hideLowBal">Hide low balance wallets</p> -->
+            <p class="hideLowBal">Assets</p>
+            <div class="walletDiv">
+              <p *ngFor="let wallet of wallets" class="walletList">
+                {{ wallet.name }}
+                :
+                <span class="walletListSpan"><span class="highlight">{{ wallet.value }}</span> ( $
+                  {{ wallet.value }} )</span>
+              </p>
+            </div>
+          </div>
+          <div class="col-6" style="padding-right: 0">
+            <div class="row" style="margin: 0% 1%; margin-bottom: 0">
+              <div class="col-12">
+                <label *ngFor="let radiobutton of radioItems">
+                  <p class="pRadioBtns">
+                    <input class="inputRadioBtns" type="radio" name="list" (click)="model.option = radiobutton"
+                      [checked]="radiobutton === model.option" (change)="radioChange(model.option)" />{{ radiobutton }}
+                  </p>
+                </label>
+              </div>
+              <div class="col-12 rightSectionWalletTop" id="totalLendingSections" *ngIf="totalLendingSection">
+                <p>
+                  Total lending with us<span style="float: right" class="highlight">USDT
+                    {{ poolBalance }}
+                  </span>
+                </p>
+                <div class="walletDiv" id="ltlist" style="height: 264px;margin-top: 4%;">
+                  <div *ngIf="wTransactions && wTransactions.length">
+                    <p *ngFor="let trans of wTransactions" class="walletList">
+                      <span *ngIf="trans.type == 'deposit'">Deposited</span><span *ngIf="trans.type == 'deposit'"
+                        class="highlight">
+                        ( USDT )</span>
+                      <span *ngIf="trans.type == 'withdraw'">Withdrawn</span><span *ngIf="trans.type == 'withdraw'"
+                        class="highlight">
+                        ( USDT )</span>
+                      :
+                      <span class="walletListSpan" *ngIf="trans.type == 'deposit'" style="color: #4fff5e">+{{
+                        trans.amount }}</span>
+                      <span class="walletListSpan" *ngIf="trans.type == 'withdraw'" style="color: #ff4f4f">-{{
+                        trans.amount }}</span>
+                    </p>
+                  </div>
+                  <p *ngIf="showLoaderForWalletTransactions" class="loaderForWalletTransactions"><i
+                      class="fa fa-spin fa-circle-o-notch"></i></p>
+                  <p *ngIf="wTransactions.length" class="viewMB" (click)="viewMoreBtn()">view more</p>
+                  <div *ngIf="!wTransactions.length">
+                    <p class="notransmsg" *ngIf="noTransactions">
+                      <i class="fa fa-frown-o sadFaceIcon"></i> Sorry, no
+                      transactions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 rightSectionWalletTop" *ngIf="bruTokenSection">
+                <p>
+                  Bru Token Balance
+                  <span style="float: right" class="highlight">0 Token </span>
+                </p>
+                <div class="walletDiv" id="ltlist" style="height: 204px">
+                  <div *ngIf="lendingTransactions && lendingTransactions.length">
+                    <p *ngFor="let trans of lendingTransactions" class="walletList">
+                      Deposited
+                      <span class="highlight">( {{ trans.currency }} )</span> :
+                      <span class="walletListSpan" style="color: #ff4f4f">-{{ trans.value }}</span>
+                    </p>
+                  </div>
+                  <div *ngIf="!lendingTransactions || !lendingTransactions.length">
+                    <p class="notransmsg">
+                      <i class="fa fa-frown-o sadFaceIcon"></i> Sorry, no
+                      transactions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 rightSectionWalletTop" *ngIf="karmaPointSection">
+                <p>
+                  Karma Point Balance
+                  <span style="float: right" class="highlight">0 Point </span>
+                </p>
+                <div class="walletDiv" id="ltlist" style="height: 204px">
+                  <div *ngIf="lendingTransactions && lendingTransactions.length">
+                    <p *ngFor="let trans of lendingTransactions" class="walletList">
+                      Deposited
+                      <span class="highlight">( {{ trans.currency }} )</span> :
+                      <span class="walletListSpan" style="color: #ff4f4f">-{{ trans.value }}</span>
+                    </p>
+                  </div>
+                  <div *ngIf="!lendingTransactions || !lendingTransactions.length">
+                    <p class="notransmsg">
+                      <i class="fa fa-frown-o sadFaceIcon"></i> Sorry, no
+                      transactions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-6">
+                        <div class="row" style="margin: 0px 15px;">
+                            <div class="col-12 rightSectionWalletTop" id="totalLendingSection">
+                                <p>Total lending with us. <span style="float: right;" class="highlight">$ 1200.00
+                                        <i *ngIf="!showExpandCollIcon" class="fa fa-minus-square expandIcon"
+                                            (click)="collapseTL()"></i>
+                                        <i *ngIf="showExpandCollIcon" class="fa fa-plus-square expandIcon"
+                                            (click)="expandTL()"></i>
+                                    </span></p>
+                                <div class="walletDiv" id="ltlist" style="height: 183px;">
+                                    <div *ngIf="lendingTransactions && lendingTransactions.length">
+                                        <p *ngFor="let trans of lendingTransactions" class="walletList">Deposited <span
+                                                class="highlight">(
+                                                {{trans.currency}} )</span> :
+                                            <span class="walletListSpan" style="color: #FF4F4F;">-{{trans.value}}</span>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="!lendingTransactions || !lendingTransactions.length">
+                                        <p class="notransmsg"><i class="fa fa-frown-o sadFaceIcon"></i> Sorry, no
+                                            transactions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 rightSectionWalletBottom" id="karmaPointSection">
+                                <p class="mb00">Karma Point Balance. <span class="highlight" style="float: right;">132
+                                        Points
+                                        <i *ngIf="showExpandCollIcon" class="fa fa-minus-square expandIcon"
+                                            (click)="collapseKP()"></i>
+                                        <i *ngIf="!showExpandCollIcon" class="fa fa-plus-square expandIcon"
+                                            (click)="expandKP()"></i>
+                                    </span></p>
+                                <div class="walletDiv" id="kplist"
+                                    style="display: none;height: 183px;margin-top: 13px;">
+                                    <div *ngIf="karmaPointTransactions && karmaPointTransactions.length">
+                                        <p *ngFor="let trans of karmaPointTransactions" class="walletList">Deposited
+                                            <span class="highlight">(
+                                                {{trans.currency}} )</span> :
+                                            <span class="walletListSpan" style="color: #FF4F4F;">-{{trans.value}}</span>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="!karmaPointTransactions || !karmaPointTransactions.length">
+                                        <p class="notransmsg"><i class="fa fa-frown-o sadFaceIcon"></i> Sorry, no
+                                            transactions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #lendmore let-modal>
+  <div class="modal-body deposit-modal" *ngIf="!lendingSuccess">
+    <!-- <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i> -->
+    <h3 class="lendMoreModalHeading">Buy Bonds</h3>
+    <div class="row lendModalDivSection">
+      <div class="col-6 lendModalDivSectionCol">
+        <ul>
+          <li style="margin-bottom: 8px">
+            Pool Name :
+            <span class="highlight">{{ selectedTransaction.name }}</span>
+          </li>
+          <li>
+            APY ( % ) :
+            <span class="highlight">{{ selectedTransaction.apy }} % p.a</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 lendModalDivSectionCol">
+        <ul class="ul2">
+          <li style="margin-bottom: 8px">
+            Collateral Type :
+            <span class="highlight">{{ selectedTransaction.ct }}</span>
+          </li>
+          <!-- <li>Lock-in Period : <span class="highlight">{{selectedTransaction.lockin || '-'}} Years</span></li> -->
+          <li>
+            Lock-in Period :
+            <span class="highlight"> {{ lockPeriod }} {{ interval }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px; margin-top: 16px">
+      <div class="col-6">
+        <p class="pSubHead">Select Crypto Asset</p>
+        <!-- <select [(ngModel)]="selectedCoin" class="inputBoxes">
+                    <option selected value="Tether (USDT)">Tether (USDT)</option>
+                </select> -->
+        <p class="inputP">
+          <img src="../../../../../assets/tether.png" class="imgSS" />
+          <span style="padding-left: 31%; color: #515151">Tether (USDT)</span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p class="pSubHead">Enter Amount</p>
+        <input class="input inputBoxes inputAmount" (ngModelChange)="calculateFees($event)" placeholder="Enter Amount"
+          [(ngModel)]="lendAmount" />
+      </div>
+    </div>
+    <p class="pSubHead" style="padding-left: 25px !important">Price Breakup</p>
+    <div class="lendMoreModalTsSty">
+      <p class="pStyDes">
+        Conversion Rate ( USDT 1 = USD 1 )
+        <span class="highlight">$ {{ lendAmount }}</span>
+      </p>
+      <p class="pStyDes">
+        Platform fees : <span class="highlight">$ {{ fees }}</span>
+      </p>
+      <p class="pStyDes borderBottom">Total USDT deducted : <span class="highlight">$ {{totalAmount}}</span></p>
+
+      <p class="pStyDes borderBottomS">
+        Brú Bonds you'll receive :
+        <span class="highlight">$ {{ totalTransactionAmount }}</span>
+      </p>
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p class="buttonsmodal cancelBtn" (click)="resetValuesAfterLendAndWithDraw()">
+          Cancel
+        </p>
+      </div>
+      <div class="col-6">
+        <p class="buttonsmodal lendNowBtn" *ngIf="!lendNowBtnClicked" (click)="handleLendNow(errorModal)">
+          Buy Now
+        </p>
+        <p class="buttonsmodal lendNowBtn" *ngIf="lendNowBtnClicked">
+          <i class="fa fa-spin fa-circle-o-notch"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body deposit-modal" *ngIf="lendingSuccess">
+    <!-- <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i> -->
+    <h3 class="lendMoreModalHeading">Bond Successfully Bought</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed</p>
+      <div class="successModalMDiv">
+        <p class="successModalPT" style="margin-bottom: 8px">
+          Successfully bought bonds worth
+          <span class="highlight">{{ selectedCoin }} {{ lendAmount }}</span> in
+          <span class="highlight">{{ selectedTransaction.name }}</span> pool
+        </p>
+        <p class="successModalPT">
+          Total Bond Balance :
+          <span class="highlight">USDT {{ totalLending }}</span>
+        </p>
+      </div>
+      <!-- <p class="sssssssssSS">View the transaction on <span class="highlight cPP">My Transaction</span> page.</p> -->
+    </div>
+    <!-- <p style="text-align: center;margin-bottom: 0;">View the transaction on <span class="highlight">Polygon
+                Blockchain</span>
+        </p> -->
+    <br />
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p class="buttonsmodal cancelBtn" (click)="resetValuesAfterLendAndWithDraw()">
+          Close
+        </p>
+      </div>
+      <div class="col-6">
+        <p class="buttonsmodal lendNowBtn" (click)="viewTransaction()">
+          View on Polygon
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #withdraw_m let-modal>
+  <div class="modal-body deposit-modal" *ngIf="!withdrawSuccess && !withdrawFailed && !noWithdrawableBalance">
+    <!-- <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i> -->
+    <h3 class="lendMoreModalHeading">Withdraw Liquidity</h3>
+    <div class="row lendModalDivSection">
+      <div class="col-6 lendModalDivSectionCol">
+        <ul>
+          <li style="margin-bottom: 8px">
+            Pool Name :
+            <span class="highlight">{{ selectedTransaction.name }}</span>
+          </li>
+          <li style="margin-bottom: 8px">
+            APY ( % ) :
+            <span class="highlight">{{ selectedTransaction.apy }} % p.a</span>
+          </li>
+          <li style="white-space: nowrap">
+            Withdrawable Balance :
+            <span class="highlight">{{ selectedCoin }} {{ withdrawBalance }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 lendModalDivSectionCol">
+        <ul class="ul2">
+          <li style="margin-bottom: 8px">
+            Collateral Type :
+            <span class="highlight">{{ selectedTransaction.ct }}</span>
+          </li>
+          <!-- <li>Lock-in Period : <span class="highlight">{{selectedTransaction.lockin || '-'}} Years</span></li> -->
+          <li>
+            Lock-in Period :
+            <span class="highlight">{{ lockPeriod }} {{ interval }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px; margin-top: 16px">
+      <!-- <div class="col-6">
+                <p class="pSubHead">Select Crypto Asset</p>
+                <select [(ngModel)]="selectedCoin" class="inputBoxes">
+                    <option selected value="" disabled>Select Crypto Asset</option>
+                    <option *ngFor="let coin of coinList" value="coin">{{coin}}</option>
+                </select>
+            </div> -->
+      <div class="col-6">
+        <p class="pSubHead">Select Crypto Asset</p>
+        <!-- <select [(ngModel)]="selectedCoin" class="inputBoxes">
+                    <option selected value="Tether (USDT)">Tether (USDT)</option>
+                </select> -->
+        <p class="inputP">
+          <img src="../../../../../assets/tether.png" class="imgSS" />
+          <span style="padding-left: 31%; color: #515151">Tether (USDT)</span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p class="pSubHead">Enter Amount</p>
+        <input class="input inputBoxes inputAmount" (ngModelChange)="calculateFeesForWithdraw($event)"
+          placeholder="Enter Amount" [(ngModel)]="withdrawAmount" />
+      </div>
+    </div>
+    <div style="margin: 15px; margin-top: 20px">
+      <p class="pStyDes">
+        Conversion Rate ( USDT 1 = USD 1 )
+        <span class="highlight">$ {{ withdrawAmount }}</span>
+      </p>
+      <!-- <p class="pStyDes borderBottom">Platform fees : <span class="highlight">$ {{fees}}</span></p> -->
+      <p class="pStyDes borderBottom">
+        Total Credit to Wallet :
+        <span class="highlight">$ {{ totalTransactionAmountWithDraw }}</span>
+      </p>
+      <!-- <p class="pStyDes borderBottom">Withdrawable Balance :{{withdrawBalance}} <span class="highlight">$
+                        {{totalTransactionAmountWithDraw}}</span></p> -->
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p class="buttonsmodal cancelBtn" (click)="modal.dismiss()">Cancel</p>
+      </div>
+      <div class="col-6">
+        <p class="buttonsmodal lendNowBtn" *ngIf="!withdrawNowBtnClicked" (click)="handleWithDrawNow(errorModal)">
+          Withdraw Now
+        </p>
+        <p class="buttonsmodal lendNowBtn" *ngIf="withdrawNowBtnClicked">
+          <i class="fa fa-spin fa-circle-o-notch"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body deposit-modal" *ngIf="withdrawSuccess && !noWithdrawableBalance">
+    <!-- <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i> -->
+    <h3 class="lendMoreModalHeading">Withdrawn Successful</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed.</p>
+      <div class="successModalMDiv">
+        <p class="successModalPT" style="margin-bottom: 8px">
+          Successfully withdrawn
+          <span class="highlight">{{ selectedCoin }} {{ withdrawAmount }}</span>
+          from
+          <span class="highlight">{{ selectedTransaction.name }}</span>
+        </p>
+        <p class="successModalPT">
+          Remaining Balance :
+          <span class="highlight">{{ selectedCoin }} {{ remainingBalance }}</span>
+        </p>
+      </div>
+      <!-- <p class="sssssssssSS">View the transaction on <span class="highlight cPP">My Transaction</span> page.</p> -->
+    </div>
+    <p style="text-align: center; margin-bottom: 0">
+      View the transaction on <span class="highlight">Polygon Blockchain</span>
+    </p>
+    <br />
+    <div class="row" style="margin: 0px">
+      <div class="col-6">
+        <p class="buttonsmodal cancelBtn" (click)="resetValuesAfterLendAndWithDraw()">
+          Close
+        </p>
+      </div>
+      <div class="col-6">
+        <p class="buttonsmodal lendNowBtn" (click)="viewTransaction()">
+          View on Polygon
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body deposit-modal" *ngIf="!withdrawSuccess && withdrawFailed && !noWithdrawableBalance">
+    <h3 class="lendMoreModalHeading">Withdrawal Not Allowed</h3>
+    <div class="successModaldivPSuccess" style="background-color: #ff4f4f36">
+      <i class="fa fa-times-circle depositSUccessPIcon" style="color: #f26f6f"></i>
+      <p class="depositSuccessModalPL" style="padding: 19px 21%; padding-right: 10px">
+        Transaction couldn't be completed.
+      </p>
+      <div class="successModalMDiv">
+        <p class="successModalPT" style="background-color: white; padding: 11px; font-size: 16px">
+          Error encountered
+        </p>
+        <p class="successModalPT" style="font-size: 16px">
+          The lock-in period for the pool is {{ lockPeriod }} {{ interval }}.
+          Kindly check back later to withdraw successfully.
+        </p>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-12">
+        <p class="buttonsmodal lendNowBtn" (click)="modal.dismiss()">Okay</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body deposit-modal" *ngIf="noWithdrawableBalance">
+    <h3 class="lendMoreModalHeading">Cannot withdraw</h3>
+    <div class="successModaldivPSuccess" style="background-color: #ff4f4f36">
+      <i class="fa fa-times-circle depositSUccessPIcon" style="color: #f26f6f"></i>
+      <p class="depositSuccessModalPL" style="padding: 19px 21%; padding-right: 10px">
+        Transaction couldn't be completed
+      </p>
+      <div class="successModalMDiv">
+        <p class="successModalPT" style="background-color: white; padding: 11px; font-size: 16px">
+          Error encountered
+        </p>
+        <p class="successModalPT" style="font-size: 16px">
+          No balance to withdraw. Please wait for the respective bond lock-in
+          periods to end.
+        </p>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-12">
+        <p class="buttonsmodal lendNowBtn" (click)="modal.dismiss()">Okay</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #errorModal let-modal>
+  <div class="modal-body deposit-modal">
+    <h3 class="lendMoreModalHeading">Transaction Failed</h3>
+    <div class="successModaldivPSuccess" style="background-color: #ff4f4f36">
+      <i class="fa fa-times-circle depositSUccessPIcon" style="color: #f26f6f"></i>
+      <p class="depositSuccessModalPL" style="padding: 19px 21%; padding-right: 10px">
+        Transaction couldn't be completed
+      </p>
+      <div class="successModalMDiv">
+        <p class="successModalPT" style="background-color: white; padding: 11px; font-size: 16px">
+          Error encountered
+        </p>
+        <p class="successModalPT" style="font-size: 16px">{{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px">
+      <div class="col-12">
+        <p class="buttonsmodal lendNowBtn" (click)="modal.dismiss()">Okay</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #bonds let-modal>
+  <div class="modal-body deposit-modal">
+    <h3 class="lendMoreModalHeading">
+      Bonds
+      <i class="fa fa-times" style="float: right; cursor: pointer" (click)="modal.dismiss()"></i>
+    </h3>
+    <div class="successModaldivPSuccess" style="background-color: #ffffff" *ngIf="!loadingBondsData">
+      <p class="bondsTitle">Active Bonds</p>
+      <table style="width: 100%">
+        <thead class="theadd">
+          <tr>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Investment Date</th>
+            <!-- <th>Action</th> -->
+          </tr>
+        </thead>
+        <tbody *ngIf="activeBonds && activeBonds.length">
+          <tr *ngFor="let bond of activeBonds; let i = index" style="margin: 0; font-size: 14px">
+            <td>{{ bond.bondAmount }} USDT</td>
+            <td>{{ bond.bondInterest * 100 | number: ".2-2" }}% p.a</td>
+            <td>{{ bond.creationDate | date: "mediumDate" }}</td>
+            <!-- <td class="lendMoreBtnTable" (click)="tradeBond(bond, tradeB)">Trade</td> -->
+          </tr>
+        </tbody>
+        <tbody *ngIf="!activeBonds || !activeBonds.length">
+          <tr>
+            <td>No active bonds</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="bondsTitle">Matured Bonds</p>
+      <table style="width: 100%">
+        <thead class="theadd">
+          <tr style="margin: 0">
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Investment Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="inActiveBonds && inActiveBonds.length">
+          <tr *ngFor="let data of inActiveBonds; let i = index" style="margin: 0; font-size: 14px">
+            <td>{{ data.bondAmount }} USDT</td>
+            <td>{{ data.bondInterest * 100 | number: ".2-2" }}% p.a</td>
+            <td>{{ data.creationDate | date: "mediumDate" }}</td>
+            <td class="lendMoreBtnTable" (click)="withdrawM(0, withdrawData[0], withdraw_m)">
+              Withdraw
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="!inActiveBonds || !inActiveBonds.length">
+          <tr>
+            <td>No matured bonds</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="successModaldivPSuccess" style="background-color: #ffffff; text-align: center" *ngIf="loadingBondsData">
+      <i class="fa fa-spin fa-circle-o-notch"></i>
+      <!-- <p style="font-size: 14px;
+            margin-top: 8px;">Loading Data</p> -->
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #poolModal let-modal>
+  <div class="modal-body deposit-modal">
+    <h3 class="lendMoreModalHeading">
+      Pool Composition
+      <i class="fa fa-times" style="float: right; cursor: pointer" (click)="modal.dismiss()"></i>
+    </h3>
+    <div class="successModaldivPSuccess" style="background-color: #ffffff" *ngIf="poolDataLoaded">
+      <div class="row">
+        <div class="col-6">
+          <p class="poolDText">
+            Pool Name : <span class="highlight">{{ selectedPool.name }}</span>
+          </p>
+        </div>
+        <div class="col-6">
+          <p class="poolDText2">
+            APY (%) : <span class="highlight">{{ selectedPool.apy }}% p.a</span>
+          </p>
+        </div>
+        <div class="col-6">
+          <p class="poolDText">
+            Lock-in Period :
+            <span class="highlight">{{ lockPeriod }} {{ interval }}</span>
+          </p>
+        </div>
+        <!-- <div class="col-4">
+                    <p class="poolDText2">Pool Value : <span class="highlight">{{selectedPool.name}}</span></p>
+                </div> -->
+        <div class="col-6">
+          <p class="poolDText">
+            Type : <span class="highlight">{{ selectedPool.ct }}</span>
+          </p>
+        </div>
+        <!-- <div class="col-4">
+                    <p class="poolDText2">Storage : <span class="highlight">{{selectedPool.name}}</span></p>
+                </div> -->
+      </div>
+      <div class="row">
+        <p class="asduTYUti" style="margin: 15px 0; color: grey; font-size: 15px">
+          <span style="width: 30%">Commodity Details</span>
+          <span style="width: 34%">Descriptions</span>
+          <span style="width: 18%">Quantity</span>
+          <span style="width: 18%">Amount</span>
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-4" style="display: block; padding-top: 15px !important">
+          <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+            [legend]="chartLegend">
+          </canvas>
+        </div>
+        <div class="col-8">
+          <p *ngFor="let data of topComm" class="asduyiu">
+            <span style="width: 22%" [class]="getColorClass(data.name)">
+              <i class="fa fa-circle" style="padding-right: 5px"></i>
+              {{ (data.total / 733) * 100 | number: ".2-2" }}%
+            </span>
+            <span style="width: 24%"><img style="width: 16px; margin-right: 7px"
+                src="../../../../../assets/images/iconCom.png" />{{ data.name }}</span>
+            <span style="width: 28%; text-align: center">{{ data.quantity / 100 | number: ".1-1" }} Qtls</span>
+            <span style="width: 26%; text-align: center">${{ data.value / 78 | numberWithComma }}</span>
+          </p>
+        </div>
+      </div>
+      <!-- <div class="row">
+                <div class="col-12">
+                    <table style="width: 100%;">
+                        <thead style="background-color: white;
+                        height: 30px;
+                        color: grey;">
+                            <tr style="margin: 0;background-color: white;">
+                                <th>Commodity Details</th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="topComm && topComm.length">
+                            <tr *ngFor="let data of topComm;let i = index" class="asbdksuiyGUy">
+                                <td colspan="5" style="display: block;">
+                                    <canvas baseChart [data]="pieChartData" [chartType]="pieChartType"
+                                        [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                                        [legend]="pieChartLegend">
+                                    </canvas>
+                                </td>
+                                <td>{{data.name}}</td>
+                                <td>{{data.quantity / 100 | number : '.2-2'}}</td>
+                                <td>{{data.value | numberWithComma}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="!topComm || !topComm.length">
+                            <tr>
+                                <td>Nothing to show.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> -->
+      <div class="row" style="margin-top: 20px">
+        <div class="col-6" style="padding: 0 5px">
+          <p class="buttonsmodal cancelBtn" style="margin-bottom: 0" (click)="modal.dismiss()()">
+            Cancel
+          </p>
+        </div>
+        <div class="col-6" style="padding: 0 5px">
+          <p class="buttonsmodal lendNowBtn" style="margin-bottom: 0" (click)="lendMore(0, tData[0], lendmore)">
+            Buy Bonds
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="successModaldivPSuccess" style="background-color: #ffffff; text-align: center" *ngIf="!poolDataLoaded">
+      <i class="fa fa-spin fa-circle-o-notch"></i>
+      <!-- <p style="font-size: 14px;
+            margin-top: 8px;">Loading Data</p> -->
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #tradeB let-modal>
+  <div class="modal-body deposit-modal">
+    <h3 class="lendMoreModalHeading">
+      Trade Bonds<i class="fa fa-times" style="float: right; cursor: pointer" (click)="modal.dismiss()"></i>
+    </h3>
+    <div class="successModaldivPSuccess" style="background-color: #ffffff; margin: 20px 55px">
+      <p class="tradetitle">Principal Amount</p>
+      <input class="tradeInput" type="text" name="principalAmount" [(ngModel)]="tradeAmount" />
+      <p class="tradetitle">Recipient Wallet Address</p>
+      <input class="tradeInput" type="text" name="walletadd" [(ngModel)]="recipientAddress" />
+      <div class="row" style="margin-top: 20px" *ngIf="!tradeSuccess">
+        <div class="col-6">
+          <p class="buttonsmodal cancelBtn" style="margin-bottom: 0" (click)="modal.dismiss()()">
+            Cancel
+          </p>
+        </div>
+        <div class="col-6">
+          <p class="buttonsmodal lendNowBtn" style="margin-bottom: 0" *ngIf="!tradeBtnClicked"
+            (click)="bondTransfer(recipientAddress, tradeAmount)">
+            Trade
+          </p>
+          <p class="buttonsmodal lendNowBtn" *ngIf="tradeBtnClicked">
+            <i class="fa fa-spin fa-circle-o-notch"></i>
+          </p>
+        </div>
+      </div>
+      <div class="row" *ngIf="tradeSuccess">
+        <div class="col-12">
+          <p>Trade Successful</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

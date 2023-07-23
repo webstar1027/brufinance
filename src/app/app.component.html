@@ -1,0 +1,19 @@
+<!-- <ng-container *ngIf="preloadData.fetching">
+  <p>Starting...</p>
+</ng-container> -->
+
+<!-- <ng-container *ngIf="!preloadData.fetching && preloadData.fetched"> -->
+<ng-container>
+  <div *ngIf="showOverlay" class="overlayforMobDev">
+    <p>
+      <img class="bruLogoOverlay" src="../assets/bruFinanceLogo.png">
+      Works best on Chrome on
+      <span class="highlight">Desktop.</span>
+    </p>
+  </div>
+  <router-outlet></router-outlet>
+</ng-container>
+
+<!-- <ng-template *ngIf="!preloadData.fetching && preloadData.failed"> -->
+<!-- <p>Preload data fetch failed. :-(</p> -->
+<!-- </ng-template> -->

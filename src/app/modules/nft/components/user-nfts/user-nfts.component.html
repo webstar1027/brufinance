@@ -1,0 +1,167 @@
+<div class="p-4">
+  <div *ngIf="fetchedData" class="row">
+    <div *ngFor="let nft of nfts" class="col-md-3 p-3">
+      <app-nft-card [nft]="nft" (borrow)="handleBorrow($event, borrowM)" (repay)="handleRepay($event, repayM)">
+      </app-nft-card>
+    </div>
+  </div>
+
+  <div class="text-center p-3" *ngIf="showSpinner">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="fetchedData && nfts.length" class="text-center">
+    <button class="btn btn-lg" (click)="handleShowMore()">
+      Show more &rarr;
+    </button>
+  </div>
+
+  <div *ngIf="fetchedData && !nfts.length && !showSpinner">
+    <p class="text-center m-3">No NFTs found</p>
+  </div>
+</div>
+<!-- <ng-template #repayM let-modal>
+  <div class="modal-body p-4 deposit-modal">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss()"></i>
+    <h3 class="modalH3">Repayment of {{selectedNft.commodity}}</h3>
+    <div class="row mainRow">
+      <div class="width40" style="width: 42%;">
+        <img src="../../../../../assets/nft/{{img}}.jpg" style="width: 88%;
+        border-radius: 8px;">
+        <p class="repayModalDescription">You are repaying the borrowed Soyabean stored in our ware- house in MATIC</p>
+      </div>
+    </div>
+    <div class="width60" style="width: 58%;"> </div>
+  </div>
+</ng-template> -->
+<ng-template #successModal let-modal>
+  <div class="modal-body p-4 deposit-modal" *ngIf="borrowSuccess">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Borrowing Successful</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed.</p>
+    </div>
+    <div class="successModaldiv">
+      <p class="youDepositedMsg" style="text-align: center;">Borrowed: <span
+          class="lightColorTheme">{{borrowAmount}}</span><span class="darkColorTheme"> MATIC</span>
+      </p>
+      <p class="successModaldivP youDepositedSubMsg">Your borrowing is shown on the <a style="color: #7C037B;"
+          href="/nfts/my"><span class="lightColorTheme">My
+            NFTs</span></a></p>
+    </div>
+    <p style="margin-bottom: 0;
+    text-align: center;">You can also view the transaction on <span class="lightColorTheme">Polygon Blockchain</span>
+    </p>
+    <br />
+    <div style="text-align: center;">
+      <button class="button button--deposit" (click)="viewTransaction()">
+        View on Polygon
+      </button>
+    </div>
+  </div>
+  <div class="modal-body p-4 deposit-modal" *ngIf="repaySuccess">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Repayment Successful</h3>
+    <div class="successModaldivPSuccess">
+      <i class="fa fa-check-circle depositSUccessPIcon"></i>
+      <p class="depositSuccessModalPL">Transaction completed.</p>
+    </div>
+    <div class="successModaldiv">
+      <p class="youDepositedMsg" style="text-align: center;">Repaid: <span
+          class="lightColorTheme">{{repayAmount}}</span><span class="darkColorTheme"> MATIC</span>
+      </p>
+      <p class="successModaldivP youDepositedSubMsg">Your repayment is shown on the <a style="color: #7C037B;"
+          href="/nfts/my"><span class="lightColorTheme">My
+            NFTs</span></a></p>
+    </div>
+    <p style="margin-bottom: 0;
+    text-align: center;">You can also view the transaction on <span class="lightColorTheme">Polygon Blockchain</span>
+    </p>
+    <br />
+    <div style="text-align: center;">
+      <button class="button button--deposit" (click)="viewTransaction()">
+        View on Polygon
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #borrowM let-modal>
+  <div class="modal-body p-4 deposit-modal">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Borrow</h3>
+    <div class="row mainRow">
+      <div class="width40" style="width: 42%;">
+        <img src="../../../../../assets/nft/{{img}}.jpg" style="width: 88%;height: 178px;
+        border-radius: 8px;">
+        <p class="highlightTextModal">You are lending <span class="lightColorTheme">MATIC</span> against <span
+            class="lightColorTheme">{{selectedNft.commodity}}</span> stored in our warehouses</p>
+      </div>
+      <div class="width60" style="width: 58%;">
+        <p class="pModalTxt">Commodity Value : <span class="lightColorTheme spanMainCard">
+            {{convertDollarToMatic(eligibleLoanAmount(borrowForm.value.price))}} MATIC ( $
+            {{borrowForm.value.price}}
+            )</span></p>
+        <p class="pEligibleAmount">Eligible Loan Amount : <span class="lightColorTheme spanMainCard">$
+            {{eligibleLoanAmount(borrowForm.value.price)}}</span></p>
+        <p class="pModalTxt" style="margin-bottom: 24px;
+        margin-top: 20px;">Enter Loan Amount ( in MATIC ) :
+          <input type="number" class="inputLoanAmount" [(ngModel)]="borrowAmount" style="margin-top: -6px;"
+            (ngModelChange)="calculateInterestandPlatformFees($event)">
+        </p>
+        <p class="pModalTxt">Interest Applicable ( @13% p.a. ) : <span class="lightColorTheme spanMainCard">
+            {{interestApplicable}} MATIC</span></p>
+        <p class="pModalTxt">Platform Fees ( @0.25% ) : <span class="lightColorTheme spanMainCard">
+            {{platformFees}} MATIC</span></p>
+        <p *ngIf="!showLoaderForBorrow" class="mainBtn" (click)="handleSubmitBorrow('borrow', successModal)">Borrow Now
+        </p>
+        <p *ngIf="showLoaderForBorrow" class="mainBtn"><i class="fa fa-spin fa-circle-o-notch"></i></p>
+      </div>
+    </div>
+    <div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #repayM let-modal>
+  <div class="modal-body p-4 deposit-modal">
+    <i class="fa fa-times closeeBtn" data-dismiss="modal" (click)="modal.dismiss('Cross Click')"></i>
+    <h3 class="modalH3">Repay</h3>
+    <div class="row mainRow">
+      <div class="width40" style="width: 42%;">
+        <img src="../../../../../assets/nft/{{img}}.jpg" style="width: 88%;height: 178px;
+        border-radius: 8px;">
+        <p class="highlightTextModal">You are repaying the amount you borrowed against <span
+            class="lightColorTheme">{{selectedNft.commodity}}</span> earlier.</p>
+      </div>
+      <div class="width60" style="width: 58%;">
+        <p class="pModalTxt" style="border-bottom: dashed #e4e4e4;
+        padding-bottom: 20px;margin-bottom: 22px;">Commodity Value : <span class="lightColorTheme spanMainCard">
+            {{convertDollarToMatic(eligibleLoanAmount(borrowForm.value.price))}} MATIC ( $
+            {{borrowForm.value.price}}
+            )</span></p>
+        <p class="pModalTxt" style="margin-bottom: 24px;
+        margin-top: 13px;">Repayment Amount ( in MATIC ) :
+          <input type="number" class="inputLoanAmount" [(ngModel)]="repayAmount" style="margin-top: -6px;"
+            (ngModelChange)="calculateInterestandTotalAmount($event)">
+        </p>
+        <p class="pModalTxt">Interest Applicable ( @13% p.a. ) : <span class="lightColorTheme spanMainCard">
+            {{interestApplicableRepay}} MATIC</span></p>
+        <p class="pModalTxt">Total Repayment Amount : <span class="lightColorTheme spanMainCard">
+            {{totalRepaymentAmount}} MATIC</span></p>
+        <p *ngIf="!showLoaderForRepay" style="margin-top: 12%;" class="mainBtn repayBtn"
+          (click)="handleSubmitRepay('repay', successModal)">
+          Repay Now
+        </p>
+        <p *ngIf="showLoaderForRepay" style="margin-top: 12%;" class="mainBtn repayBtn"><i
+            class="fa fa-spin fa-circle-o-notch"></i></p>
+      </div>
+    </div>
+    <div>
+    </div>
+  </div>
+</ng-template>

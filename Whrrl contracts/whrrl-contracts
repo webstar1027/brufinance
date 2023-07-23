@@ -1,0 +1,17 @@
+Loan.sol
+loan disburs :
+Used to store a loan against the an asset. This functionality decreases free tokens, increases lien tokens, sets total loan amount and set lien status to true in grain details. It stores loan details against loan id for that asset.
+
+repayment:
+used to repay the loan amount. If the loan amount is paid in full the lien status is reset.
+
+
+asset contract in Token.sol
+The initializtion of the contract represents the creation of new whr in the system. It is intialized with the values of the asset .
+
+Token.sol
+kill token
+It sets the whr status to 0. Effectively deleting the receipt
+
+
+ 

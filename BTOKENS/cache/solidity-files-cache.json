@@ -1,0 +1,645 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/BRU.sol": {
+      "lastModificationDate": 1644647579360,
+      "contentHash": "c9d6e56c85dae411d6c75b1c6356d10e",
+      "sourceName": "contracts/BRU.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BRU"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/Comptroller.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "e792459231f49361d842ea5493667940",
+      "sourceName": "contracts/Comptroller.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ErrorReporter.sol",
+        "./PriceOracle.sol",
+        "./ComptrollerInterface.sol",
+        "./ComptrollerStorage.sol",
+        "./Unitroller.sol",
+        "./BRU.sol",
+        "./ExponentialNoError.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Comptroller"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/ErrorReporter.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "1c2958322fed8ae568a338c94046c314",
+      "sourceName": "contracts/ErrorReporter.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ComptrollerErrorReporter",
+        "TokenErrorReporter"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/PriceOracle.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "74aa77c1ec2f492e34c688775b9091b4",
+      "sourceName": "contracts/PriceOracle.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "PriceOracle"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/ComptrollerInterface.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "696d751906bc8475905835ddd0845c05",
+      "sourceName": "contracts/ComptrollerInterface.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ComptrollerInterface"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/ComptrollerStorage.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "f1ddf8aea20100dcc7bcf2aca8ed159b",
+      "sourceName": "contracts/ComptrollerStorage.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BToken.sol",
+        "./PriceOracle.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ComptrollerV1Storage",
+        "ComptrollerV2Storage",
+        "ComptrollerV3Storage",
+        "ComptrollerV4Storage",
+        "ComptrollerV5Storage",
+        "ComptrollerV6Storage",
+        "UnitrollerAdminStorage"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/Unitroller.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "53c181524f1130742a366c7b091b1be6",
+      "sourceName": "contracts/Unitroller.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ErrorReporter.sol",
+        "./ComptrollerStorage.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Unitroller"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/ExponentialNoError.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "617fe56241b9a2688fbd555c0558ad58",
+      "sourceName": "contracts/ExponentialNoError.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ExponentialNoError"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/BToken.sol": {
+      "lastModificationDate": 1645107830760,
+      "contentHash": "a05ffc8cee10ff4739584b94df8754e4",
+      "sourceName": "contracts/BToken.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ComptrollerInterface.sol",
+        "./BTokenInterfaces.sol",
+        "./ErrorReporter.sol",
+        "./Exponential.sol",
+        "./EIP20Interface.sol",
+        "./InterestRateModel.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BToken"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/BTokenInterfaces.sol": {
+      "lastModificationDate": 1644647579360,
+      "contentHash": "38c87f45fe32abfc0c89bfa12a6896c1",
+      "sourceName": "contracts/BTokenInterfaces.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ComptrollerInterface.sol",
+        "./InterestRateModel.sol",
+        "./EIP20NonStandardInterface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BDelegateInterface",
+        "BDelegationStorage",
+        "BDelegatorInterface",
+        "BErc20Interface",
+        "BErc20Storage",
+        "BTokenInterface",
+        "BTokenStorage"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/Exponential.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "61eec9d5700022c8eadf87343df98691",
+      "sourceName": "contracts/Exponential.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./CarefulMath.sol",
+        "./ExponentialNoError.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Exponential"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/EIP20Interface.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "02c0d6467393f0cf2247bcadb6053f1b",
+      "sourceName": "contracts/EIP20Interface.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "EIP20Interface"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/InterestRateModel.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "8ea11783407ba07531901b7f8e4f910f",
+      "sourceName": "contracts/InterestRateModel.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SafeMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "InterestRateModel"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/EIP20NonStandardInterface.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "836dc202a88652868fa74ea4b67aa382",
+      "sourceName": "contracts/EIP20NonStandardInterface.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "EIP20NonStandardInterface"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/SafeMath.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "8490df83000caa6bfdc3cc4a4b430207",
+      "sourceName": "contracts/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/CarefulMath.sol": {
+      "lastModificationDate": 1644647579360,
+      "contentHash": "97dc52efe93fe296a521aaa9454808a0",
+      "sourceName": "contracts/CarefulMath.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "CarefulMath"
+      ]
+    },
+    "/home/ok/BruFinance/brufinancev2/BTOKENS/contracts/Governance/BRU.sol": {
+      "lastModificationDate": 1644647579364,
+      "contentHash": "c9d6e56c85dae411d6c75b1c6356d10e",
+      "sourceName": "contracts/Governance/BRU.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BRU"
+      ]
+    }
+  }
+}
